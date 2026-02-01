@@ -60,7 +60,7 @@ export default function BentoGrid() {
                         return isSocialMedia ? (
                             <Link
                                 key={domain.title}
-                                href={`/domains/${domain.slug}`}
+                                href="/marketing"
                                 className="block"
                             >
                                 {CardContent}
