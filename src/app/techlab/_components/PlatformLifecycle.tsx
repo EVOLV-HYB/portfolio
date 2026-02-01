@@ -44,14 +44,38 @@ export default function PlatformLifecycle() {
         offset: ["start end", "end start"]
     });
 
+    const yContent = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+    const yOrbs = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
     return (
-        <section ref={containerRef} className="py-32 px-6 bg-muted/30">
-            <div className="container max-w-6xl mx-auto">
+        <section ref={containerRef} className="py-32 px-6 bg-muted/30 relative overflow-hidden">
+            {/* Cinematic background parallax elements */}
+            <motion.div
+                className="absolute inset-0 opacity-20 pointer-events-none"
+                style={{ y: yOrbs }}
+            >
+                <div className="absolute top-40 left-[-10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-40 right-[-10%] w-96 h-96 bg-violet-500/10 rounded-full blur-[120px]" />
+            </motion.div>
+
+            <motion.div
+                className="container max-w-6xl mx-auto relative z-10"
+                style={{ y: yContent, opacity }}
+            >
                 <div className="mb-20 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="inline-block px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-6"
+                    >
+                        Methodology
+                    </motion.div>
                     <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6 uppercase">
                         From Idea to Living Platform
                     </h2>
-                    <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
+                    <p className="text-muted-foreground text-xl max-w-3xl mx-auto font-light">
                         Our proven methodology for building platforms that last.
                     </p>
                 </div>
@@ -59,7 +83,7 @@ export default function PlatformLifecycle() {
                 {/* Desktop: Horizontal Timeline */}
                 <div className="hidden lg:block relative">
                     {/* Timeline line */}
-                    <div className="absolute top-12 left-0 w-full h-1 bg-white/5 rounded-full">
+                    <div className="absolute top-12 left-0 w-full h-1 bg-white/5 rounded-full overflow-hidden">
                         <motion.div
                             className="h-full bg-gradient-to-r from-accent via-accent to-accent/50 rounded-full"
                             style={{
@@ -82,13 +106,14 @@ export default function PlatformLifecycle() {
                                 {/* Node */}
                                 <div className="flex justify-center mb-8">
                                     <motion.div
-                                        className="w-24 h-24 rounded-2xl bg-card border border-white/10 flex items-center justify-center relative z-10 group hover:border-accent/50 transition-all"
-                                        whileHover={{ scale: 1.1 }}
+                                        className="w-24 h-24 rounded-2xl bg-card/80 backdrop-blur-md border border-white/10 flex items-center justify-center relative z-10 group hover:border-accent/50 transition-all shadow-xl"
+                                        whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                                     >
                                         <phase.icon className={`w-10 h-10 ${phase.color}`} />
                                         <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-accent text-accent-foreground flex items-center justify-center text-xs font-black">
                                             {index + 1}
                                         </div>
+                                        <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity" />
                                     </motion.div>
                                 </div>
 
@@ -96,7 +121,7 @@ export default function PlatformLifecycle() {
                                     <h3 className="text-lg font-black mb-3 uppercase tracking-tight leading-tight">
                                         {phase.title}
                                     </h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                    <p className="text-sm text-muted-foreground leading-relaxed font-light">
                                         {phase.description}
                                     </p>
                                 </div>
@@ -117,7 +142,7 @@ export default function PlatformLifecycle() {
                             className="flex gap-6"
                         >
                             <div className="flex flex-col items-center">
-                                <div className="w-16 h-16 rounded-2xl bg-card border border-white/10 flex items-center justify-center shrink-0 relative">
+                                <div className="w-16 h-16 rounded-2xl bg-card/80 backdrop-blur-md border border-white/10 flex items-center justify-center shrink-0 relative">
                                     <phase.icon className={`w-7 h-7 ${phase.color}`} />
                                     <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent text-accent-foreground flex items-center justify-center text-xs font-black">
                                         {index + 1}
@@ -129,17 +154,17 @@ export default function PlatformLifecycle() {
                             </div>
 
                             <div className="flex-1 pb-8">
-                                <h3 className="text-xl font-black mb-2 uppercase tracking-tight">
+                                <h3 className="text-xl font-black mb-2 uppercase tracking-tight leading-tight">
                                     {phase.title}
                                 </h3>
-                                <p className="text-muted-foreground leading-relaxed">
+                                <p className="text-muted-foreground leading-relaxed font-light">
                                     {phase.description}
                                 </p>
                             </div>
                         </motion.div>
                     ))}
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 }
