@@ -192,6 +192,7 @@ export default function UseCases() {
 
     // Background and Section Parallax
     const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+    const orbsY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
     const exitOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0.6]);
     const exitScale = useTransform(scrollYProgress, [0.8, 1], [1, 0.98]);
 
@@ -202,9 +203,13 @@ export default function UseCases() {
         >
             {/* Cinematic Background with slow parallax */}
             <motion.div
-                className="absolute inset-0 grid-pattern opacity-[0.03] pointer-events-none"
-                style={{ y: gridY }}
-            />
+                className="absolute inset-0 opacity-10 pointer-events-none"
+                style={{ y: orbsY }}
+            >
+                <div className="absolute top-20 left-[-5%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]" />
+                <div className="absolute bottom-20 right-[-5%] w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[120px]" />
+                <motion.div className="absolute inset-0 grid-pattern opacity-[0.03]" style={{ y: gridY }} />
+            </motion.div>
 
             <motion.div
                 className="container max-w-7xl mx-auto relative z-10"

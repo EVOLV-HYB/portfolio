@@ -38,16 +38,21 @@ export default function EngineeringPrinciples() {
         offset: ["start end", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
+    const yBackground = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+    const yContent = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     return (
         <section ref={sectionRef} className="py-32 px-6 relative overflow-hidden bg-background z-20">
-            {/* Cinematic morphing grid background */}
+            {/* Cinematic background parallax elements */}
             <motion.div
-                className="absolute inset-0 grid-pattern opacity-20 pointer-events-none"
-                style={{ y }}
-            />
+                className="absolute inset-0 opacity-20 pointer-events-none"
+                style={{ y: yBackground }}
+            >
+                <div className="absolute top-20 right-[5%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]" />
+                <div className="absolute bottom-20 left-[5%] w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]" />
+                <div className="absolute inset-0 grid-pattern opacity-10" />
+            </motion.div>
 
             <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none"
@@ -67,7 +72,7 @@ export default function EngineeringPrinciples() {
 
             <motion.div
                 className="container max-w-6xl mx-auto relative z-10"
-                style={{ opacity }}
+                style={{ y: yContent, opacity }}
             >
                 {/* Editorial header */}
                 <div className="mb-20">
@@ -89,7 +94,7 @@ export default function EngineeringPrinciples() {
                         className="text-4xl md:text-7xl font-black tracking-tighter mb-6 uppercase leading-[0.9]"
                     >
                         Engineering<br />
-                        <span className="text-accent">Principles</span>
+                        <span className="text-accent underline decoration-accent/30 underline-offset-8">Principles</span>
                     </motion.h2>
 
                     <motion.p
@@ -136,7 +141,7 @@ export default function EngineeringPrinciples() {
                             <div className="relative z-10">
                                 {/* Icon with cinematic glow */}
                                 <motion.div
-                                    className="relative w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 overflow-hidden"
+                                    className="relative w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 overflow-hidden shadow-lg"
                                     whileHover={{ scale: 1.1 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >

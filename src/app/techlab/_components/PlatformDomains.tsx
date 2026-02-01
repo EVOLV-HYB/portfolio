@@ -109,17 +109,29 @@ export default function PlatformDomains() {
     });
 
     // Map scroll progress to horizontal movement
-    // We have 4 cards, so we move -75% to show the last one fully if cards are 100vw, 
-    // but here we use gaps and fixed widths, so we'll move by percentage of the container.
     const x = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
+
+    // Parallax background elements
+    const orb1X = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+    const orb2X = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
     return (
         <section ref={targetRef} className="relative h-[400vh] bg-[#050505] z-10">
             {/* The Sticky Wrapper */}
             <div className="sticky top-0 flex h-screen items-center overflow-hidden">
 
-                {/* Architectural Background */}
+                {/* Architectural Background with Parallax Orbs */}
                 <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
+
+                <motion.div
+                    style={{ x: orb1X }}
+                    className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none"
+                />
+                <motion.div
+                    style={{ x: orb2X }}
+                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[150px] pointer-events-none"
+                />
+
                 <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
 
                 {/* Section Header (Fixed in place) */}
@@ -128,7 +140,7 @@ export default function PlatformDomains() {
                         opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0]),
                         x: useTransform(scrollYProgress, [0, 0.2], [0, -50])
                     }}
-                    className="absolute top-20 left-6 md:left-12 z-20 pointer-events-none"
+                    className="absolute top-20 left-6 md:left-12 z-12 pointer-events-none"
                 >
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
@@ -150,7 +162,7 @@ export default function PlatformDomains() {
                 </motion.div>
 
                 {/* The Horizontal Moving Track */}
-                <motion.div style={{ x }} className="flex gap-12 px-12 md:pl-[600px] md:pr-48">
+                <motion.div style={{ x }} className="flex gap-12 px-12 md:pl-[600px] md:pr-48 relative z-10">
                     {domains.map((domain, index) => (
                         <div
                             key={index}
