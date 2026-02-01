@@ -19,34 +19,34 @@ Built with a focus on **performance**, **aesthetic precision**, and **developer 
 
 ## 📂 Architecture
 
-We employ a modular, domain-driven architecture to keep our codebase as scalable as our solutions.
+We employ a modular, domain-driven architecture. Each core capability has its own dedicated route and component ecosystem, ensuring separation of concerns and scalability.
 
 ```
 src/
 ├── app/
-│   ├── domains/             # Domain-specific landing pages (Dynamic & Static)
-│   │   └── [slug]/          # Modular route handling
-│   ├── globals.css          # Global styles & Tailwind directives
-│   ├── layout.tsx           # Root layout with systemic design patterns
-│   └── page.tsx             # Main landing view
+│   ├── marketing/           # Social Media & Community Management
+│   ├── techlab/             # Web & Platform Engineering
+│   ├── product/             # Product & Startup Building
+│   ├── consultancy/         # Strategy & Advisory
+│   ├── content/             # content & Creative Systems
+│   ├── globals.css          # Global design system
+│   └── page.tsx             # Main gateway
 ├── components/
-│   ├── sections/            # Reusable page sections (Hero, Process, etc.)
+│   ├── sections/            # Reusable page sections (Hero, BentoGrid)
 │   └── shared/              # Shared UI primitives (Navigation, Footers)
 └── lib/
-    ├── domains.ts           # Central config for service domains
-    └── utils.ts             # CN and helper utilities
+    └── domains.ts           # Central service configuration
 ```
 
 ## 🛠️ Core Domains
 
-Our work is organized into six interconnected pillars, each represented by a dedicated digital experience:
+Our work is organized into interconnected pillars, each represented by a dedicated digital experience:
 
-1.  **Content and Creative Systems:** Architecting high-volume content engines.
-2.  **Social Media & Community Management:** Building living, breathing social ecosystems.
-3.  **Marketing Infrastructure:** The plumbing of growth (CRM, Automation).
-4.  **Web & Platform Engineering:** High-performance digital foundations.
-5.  **Product and Startup Building:** From zero to MVP to scale.
-6.  **Consulting & Advisory:** Partner-level strategy to navigate bottlenecks.
+1.  **[Social Media & Community](/marketing):** Building living, breathing social ecosystems.
+2.  **[Web & Platform Engineering](/techlab):** High-performance digital foundations.
+3.  **[Product Building](/product):** From concept to MVP to scale.
+4.  **[Consulting](/consultancy):** Partner-level strategy to navigate bottlenecks.
+5.  **[Content Systems](/content):** High-volume creative engines.
 
 ## ⚡ Getting Started
 
