@@ -29,8 +29,10 @@ const domains = [
             "Automated onboarding",
             "Smart approval workflows"
         ],
-        color: "bg-blue-500/10",
+        color: "bg-blue-500/5",
+        hoverBg: "hover:bg-blue-500/10",
         border: "border-blue-500/20",
+        hoverBorder: "hover:border-blue-500/40",
         iconColor: "text-blue-400",
     },
     {
@@ -48,8 +50,10 @@ const domains = [
             "Agency websites",
             "Product launches"
         ],
-        color: "bg-cyan-500/10",
+        color: "bg-cyan-500/5",
+        hoverBg: "hover:bg-cyan-500/10",
         border: "border-cyan-500/20",
+        hoverBorder: "hover:border-cyan-500/40",
         iconColor: "text-cyan-400",
     },
     {
@@ -67,8 +71,10 @@ const domains = [
             "Admin panels",
             "Multi-tenant platforms"
         ],
-        color: "bg-violet-500/10",
+        color: "bg-violet-500/5",
+        hoverBg: "hover:bg-violet-500/10",
         border: "border-violet-500/20",
+        hoverBorder: "hover:border-violet-500/40",
         iconColor: "text-violet-400",
     },
     {
@@ -86,8 +92,10 @@ const domains = [
             "CRM alternatives",
             "Operational dashboards"
         ],
-        color: "bg-amber-500/10",
+        color: "bg-amber-500/5",
+        hoverBg: "hover:bg-amber-500/10",
         border: "border-amber-500/20",
+        hoverBorder: "hover:border-amber-500/40",
         iconColor: "text-amber-400",
     },
 ];
@@ -150,7 +158,8 @@ export default function PlatformDomains() {
                                 "group relative h-[550px] w-[320px] md:w-[500px] shrink-0 overflow-hidden rounded-[32px] border backdrop-blur-md transition-all duration-500 p-8 flex flex-col justify-between",
                                 domain.border,
                                 domain.color,
-                                "bg-black/40 hover:bg-black/60 hover:border-blue-500/40"
+                                domain.hoverBg,
+                                domain.hoverBorder
                             )}
                         >
                             <div>
