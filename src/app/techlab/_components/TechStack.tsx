@@ -13,52 +13,39 @@ import {
     SiMongodb,
     SiDocker,
     SiKubernetes,
-    SiVercel
+    SiVercel,
+    SiFigma,
+    SiAdobexd,
+    SiGraphql,
+    SiRedis,
+    SiSupabase,
+    SiFirebase
 } from "react-icons/si";
-import { Code2, Server, Workflow, Cloud } from "lucide-react";
 import { FaAws } from "react-icons/fa";
-const techStack = {
-    frontend: {
-        title: "Frontend",
-        icon: Code2,
-        color: "from-blue-500/20 to-cyan-500/20",
-        technologies: [
-            { name: "React", icon: SiReact, color: "#61DAFB" },
-            { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
-            { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-            { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" }
-        ]
-    },
-    backend: {
-        title: "Backend",
-        icon: Server,
-        color: "from-violet-500/20 to-purple-500/20",
-        technologies: [
-            { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-            { name: "Python", icon: SiPython, color: "#3776AB" },
-            { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
-            { name: "MongoDB", icon: SiMongodb, color: "#47A248" }
-        ]
-    },
-    automation: {
-        title: "Automation",
-        icon: Workflow,
-        color: "from-amber-500/20 to-orange-500/20",
-        technologies: [
-            { name: "Docker", icon: SiDocker, color: "#2496ED" },
-            { name: "Kubernetes", icon: SiKubernetes, color: "#326CE5" }
-        ]
-    },
-    cloud: {
-        title: "Cloud & Infrastructure",
-        icon: Cloud,
-        color: "from-green-500/20 to-emerald-500/20",
-        technologies: [
-            { name: "AWS", icon: FaAws, color: "#FF9900" },
-            { name: "Vercel", icon: SiVercel, color: "#000000" }
-        ]
-    }
-};
+
+const technologies = [
+    { name: "React", icon: SiReact, color: "#61DAFB" },
+    { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
+    { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+    { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+    { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+    { name: "Python", icon: SiPython, color: "#3776AB" },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+    { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+    { name: "Docker", icon: SiDocker, color: "#2496ED" },
+    { name: "Kubernetes", icon: SiKubernetes, color: "#326CE5" },
+    { name: "AWS", icon: FaAws, color: "#FF9900" },
+    { name: "Vercel", icon: SiVercel, color: "#FFFFFF" },
+    { name: "Figma", icon: SiFigma, color: "#F24E1E" },
+    { name: "Adobe XD", icon: SiAdobexd, color: "#FF61F6" },
+    { name: "GraphQL", icon: SiGraphql, color: "#E10098" },
+    { name: "Redis", icon: SiRedis, color: "#DC382D" },
+    { name: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
+    { name: "Firebase", icon: SiFirebase, color: "#FFCA28" }
+];
+
+// Duplicate items for a seamless loop
+const marqueeItems = [...technologies, ...technologies, ...technologies];
 
 export default function TechStack() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -67,12 +54,12 @@ export default function TechStack() {
         offset: ["start end", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+    const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
 
     return (
-        <section ref={sectionRef} className="py-32 px-6 bg-muted/30 relative overflow-hidden">
-            {/* Cinematic floating orbs */}
+        <section ref={sectionRef} className="py-24 bg-muted/30 relative overflow-hidden">
+            {/* Cinematic background elements */}
             <motion.div
                 className="absolute inset-0 opacity-30 pointer-events-none"
                 style={{ y }}
@@ -82,7 +69,7 @@ export default function TechStack() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent/10 rounded-full blur-[100px]" />
             </motion.div>
 
-            {/* Architectural grid */}
+            {/* Architectural grid overlay */}
             <div className="absolute inset-0 opacity-5 pointer-events-none">
                 <div className="absolute inset-0" style={{
                     backgroundImage: `
@@ -94,19 +81,19 @@ export default function TechStack() {
             </div>
 
             <motion.div
-                className="container max-w-6xl mx-auto relative z-10"
+                className="relative z-10"
                 style={{ opacity }}
             >
-                {/* Editorial header */}
-                <div className="mb-20">
+                {/* Header Section */}
+                <div className="container max-w-6xl mx-auto px-6 mb-20 text-center md:text-left">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="flex items-center gap-4 mb-6"
+                        className="flex items-center justify-center md:justify-start gap-4 mb-6"
                     >
                         <div className="h-px w-12 bg-accent" />
-                        <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Technology Stack</span>
+                        <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Our Arsenal</span>
                     </motion.div>
 
                     <motion.h2
@@ -114,10 +101,10 @@ export default function TechStack() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-7xl font-black tracking-tighter mb-6 uppercase leading-[0.9]"
+                        className="text-4xl md:text-7xl font-black tracking-tighter mb-8 uppercase leading-[0.9]"
                     >
-                        Technologies We<br />
-                        <span className="text-accent">Engineer With</span>
+                        Built With Modern<br />
+                        <span className="text-accent underline decoration-accent/30 underline-offset-8">Battle-Tested Tech</span>
                     </motion.h2>
 
                     <motion.p
@@ -125,89 +112,55 @@ export default function TechStack() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-muted-foreground text-xl max-w-3xl font-light"
+                        className="text-muted-foreground text-xl max-w-3xl font-light mx-auto md:mx-0"
                     >
-                        Modern, battle-tested tools for building scalable platforms. We choose technologies based on performance, maintainability, and ecosystem maturity.
+                        Leveraging high-performance, industry-leading tools to deliver scalable and resilient digital solutions.
                     </motion.p>
                 </div>
 
-                {/* Cinematic grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {Object.entries(techStack).map(([key, category], categoryIndex) => (
+                {/* Marquee Container */}
+                <div className="relative mt-10">
+                    {/* Gradient Masks for smooth edges */}
+                    <div className="absolute left-0 top-0 bottom-0 w-20 md:w-60 bg-gradient-to-r from-muted/30 to-transparent z-20 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-20 md:w-60 bg-gradient-to-l from-muted/30 to-transparent z-20 pointer-events-none" />
+
+                    <div className="flex overflow-hidden py-10">
                         <motion.div
-                            key={key}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{
-                                delay: categoryIndex * 0.1,
-                                duration: 0.8,
-                                ease: [0.25, 0.4, 0.25, 1]
+                            className="flex gap-8 md:gap-16 items-center flex-nowrap"
+                            animate={{
+                                x: ["0%", "-33.33%"]
                             }}
-                            className="relative bg-card/50 backdrop-blur-sm border border-white/5 rounded-3xl p-8 overflow-hidden group hover:border-accent/30 transition-all duration-500"
+                            transition={{
+                                duration: 30,
+                                repeat: Infinity,
+                                ease: "linear",
+                            }}
+                            style={{ width: "fit-content" }}
                         >
-                            {/* Gradient overlay */}
-                            <motion.div
-                                className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
-                            />
-
-                            {/* Architectural accent */}
-                            <motion.div
-                                className="absolute top-0 left-0 right-0 h-0.5 bg-accent/30"
-                                initial={{ scaleX: 0 }}
-                                whileInView={{ scaleX: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: categoryIndex * 0.1 + 0.3, duration: 0.8 }}
-                            />
-
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <motion.div
-                                        className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center"
-                                        whileHover={{ rotate: 360 }}
-                                        transition={{ duration: 0.6 }}
-                                    >
-                                        <category.icon className="w-6 h-6 text-accent" />
-                                    </motion.div>
-                                    <h3 className="text-2xl font-black uppercase tracking-tight">
-                                        {category.title}
-                                    </h3>
+                            {marqueeItems.map((tech, index) => (
+                                <div
+                                    key={`${tech.name}-${index}`}
+                                    className="flex items-center gap-4 px-6 py-4 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/5 hover:border-accent/30 transition-all group cursor-pointer"
+                                >
+                                    <div className="relative flex items-center justify-center w-8 h-8 md:w-12 md:h-12">
+                                        {/* Tech Icon */}
+                                        <tech.icon
+                                            className="w-full h-full transition-transform duration-500 group-hover:scale-125 group-hover:rotate-12"
+                                            style={{ color: tech.color }}
+                                        />
+                                        {/* Glow effect on hover */}
+                                        <div
+                                            className="absolute inset-0 blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+                                            style={{ backgroundColor: tech.color }}
+                                        />
+                                    </div>
+                                    <span className="text-lg md:text-2xl font-black uppercase tracking-tight whitespace-nowrap bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+                                        {tech.name}
+                                    </span>
                                 </div>
-
-                                <div className="grid grid-cols-2 gap-4">
-                                    {category.technologies.map((tech, techIndex) => (
-                                        <motion.div
-                                            key={tech.name}
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            viewport={{ once: true }}
-                                            transition={{
-                                                delay: categoryIndex * 0.1 + techIndex * 0.05,
-                                                type: "spring",
-                                                stiffness: 200
-                                            }}
-                                            whileHover={{
-                                                scale: 1.05,
-                                                y: -5
-                                            }}
-                                            className="relative flex items-center gap-3 p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-accent/30 transition-all group/tech cursor-pointer overflow-hidden"
-                                        >
-                                            {/* Hover glow */}
-                                            <motion.div
-                                                className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover/tech:opacity-100 transition-opacity"
-                                            />
-
-                                            <tech.icon
-                                                className="w-8 h-8 shrink-0 group-hover/tech:scale-110 transition-transform relative z-10"
-                                                style={{ color: tech.color }}
-                                            />
-                                            <span className="font-bold text-sm relative z-10">{tech.name}</span>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
+                            ))}
                         </motion.div>
-                    ))}
+                    </div>
                 </div>
             </motion.div>
         </section>

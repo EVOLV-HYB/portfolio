@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Building2, BarChart3, Users, Database, Code, Sparkles } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, MouseEvent } from "react";
+import { cn } from "@/lib/utils";
 
 const useCases = [
     {
@@ -42,176 +43,235 @@ const useCases = [
     }
 ];
 
+function UseCaseCard({ useCase, index }: { useCase: typeof useCases[0], index: number }) {
+    const [isHovered, setIsHovered] = useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    // Cursor-driven 3D tilt
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 150, damping: 20 });
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 150, damping: 20 });
+
+    // Icon counter-motion
+    const iconX = useSpring(useTransform(mouseX, [-0.5, 0.5], [10, -10]), { stiffness: 150, damping: 20 });
+    const iconY = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 150, damping: 20 });
+
+    const handleMouseMove = (e: MouseEvent) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        mouseX.set(x);
+        mouseY.set(y);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+        mouseX.set(0);
+        mouseY.set(0);
+    };
+
+    // Entrance variants
+    const entranceVariants = {
+        hidden: {
+            opacity: 0,
+            y: index % 2 === 0 ? 40 : 20,
+            scale: index % 3 === 1 ? 0.96 : 1
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.33, 1, 0.68, 1] as [number, number, number, number],
+                delay: index * 0.14
+            }
+        }
+    };
+
+    return (
+        <motion.div
+            ref={cardRef}
+            variants={entranceVariants}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                rotateX: rotateX,
+                rotateY: rotateY,
+                transformStyle: "preserve-3d",
+            }}
+            className={cn(
+                "group relative bg-[#0a0a0a] backdrop-blur-sm border border-white/5 rounded-[32px] p-8 overflow-hidden transition-all duration-500 cursor-pointer",
+                isHovered ? "border-blue-500/20 -translate-y-[6px]" : ""
+            )}
+        >
+            {/* Box shadow intensify on hover */}
+            <div className={cn(
+                "absolute inset-0 transition-opacity duration-500 pointer-events-none",
+                isHovered ? "opacity-100 shadow-[0_20px_50px_-12px_rgba(37,99,235,0.15)]" : "opacity-0"
+            )} />
+
+            {/* Diagonal highlight sweep */}
+            <AnimatePresence>
+                {isHovered && (
+                    <motion.div
+                        initial={{ left: "-100%", top: "-100%" }}
+                        animate={{ left: "100%", top: "100%" }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                        className="absolute h-[250%] w-[100px] bg-gradient-to-r from-transparent via-white/[0.03] to-transparent rotate-45 pointer-events-none z-20"
+                    />
+                )}
+            </AnimatePresence>
+
+            {/* Border glow */}
+            <div className={cn(
+                "absolute inset-0 border border-blue-500/20 rounded-[32px] transition-opacity duration-700 pointer-events-none",
+                isHovered ? "opacity-100" : "opacity-0"
+            )} />
+
+            <div className="relative z-10" style={{ transform: "translateZ(30px)" }}>
+                {/* Icon with cinematic reveal */}
+                <motion.div
+                    style={{ x: iconX, y: iconY }}
+                    className="relative w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 overflow-hidden"
+                >
+                    <motion.div
+                        className="absolute inset-0 bg-blue-500/10 blur-xl"
+                        animate={isHovered ? {
+                            scale: [1, 1.3, 1],
+                            opacity: [0.3, 0.6, 0.3]
+                        } : {}}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                    />
+                    <motion.div
+                        animate={isHovered ? { rotate: [0, -3, 0] } : {}}
+                        transition={{ duration: 0.4 }}
+                    >
+                        <useCase.icon className="w-7 h-7 text-blue-500 relative z-10" />
+                    </motion.div>
+                </motion.div>
+
+                <h3 className="text-2xl font-black mb-4 uppercase tracking-tight leading-tight text-white/90">
+                    {useCase.title}
+                </h3>
+                <p className="text-white/40 leading-relaxed mb-6 font-light text-sm">
+                    {useCase.description}
+                </p>
+
+                {/* Tags with "wake up" animation */}
+                <div className="flex flex-wrap gap-2">
+                    {useCase.tags.map((tag, i) => (
+                        <motion.span
+                            key={i}
+                            animate={isHovered ? { opacity: 1, scale: 1 } : { opacity: 0.7, scale: 0.98 }}
+                            transition={{ delay: i * 0.04 }}
+                            className="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/5 group-hover:border-blue-500/20 transition-colors flex items-center gap-1.5 text-white/60"
+                        >
+                            <Sparkles className="w-2.5 h-2.5 text-blue-500" />
+                            {tag}
+                        </motion.span>
+                    ))}
+                </div>
+            </div>
+        </motion.div>
+    );
+}
+
 export default function UseCases() {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const sectionRef = useRef<HTMLElement>(null);
+
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start end", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+    // Background and Section Parallax
+    const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+    const orbsY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+    const exitOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0.6]);
+    const exitScale = useTransform(scrollYProgress, [0.8, 1], [1, 0.98]);
 
     return (
-        <section ref={sectionRef} className="py-32 px-6 relative overflow-hidden">
-            {/* Cinematic gradient overlay */}
+        <section
+            ref={sectionRef}
+            className="py-32 px-6 relative overflow-hidden bg-[#050505]"
+        >
+            {/* Cinematic Background with slow parallax */}
             <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent pointer-events-none"
-                style={{ y }}
-            />
-
-            {/* Architectural lines */}
-            <div className="absolute inset-0 opacity-5 pointer-events-none">
-                <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
-                <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
-            </div>
+                className="absolute inset-0 opacity-10 pointer-events-none"
+                style={{ y: orbsY }}
+            >
+                <div className="absolute top-20 left-[-5%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]" />
+                <div className="absolute bottom-20 right-[-5%] w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[120px]" />
+                <motion.div className="absolute inset-0 grid-pattern opacity-[0.03]" style={{ y: gridY }} />
+            </motion.div>
 
             <motion.div
                 className="container max-w-7xl mx-auto relative z-10"
-                style={{ opacity }}
+                style={{ opacity: exitOpacity, scale: exitScale }}
             >
                 {/* Editorial header */}
-                <div className="mb-20">
+                <div className="mb-24">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         className="flex items-center gap-4 mb-6"
                     >
-                        <div className="h-px w-12 bg-accent" />
-                        <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Use Cases</span>
+                        <div className="h-px w-12 bg-blue-500" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-blue-500">Selection</span>
                     </motion.div>
 
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-7xl font-black tracking-tighter mb-6 uppercase leading-[0.9]"
-                    >
-                        What We<br />
-                        <span className="text-accent">Build</span>
-                    </motion.h2>
+                    <div className="overflow-hidden mb-6">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                            className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85] text-white flex flex-col md:flex-row md:items-center gap-x-6"
+                        >
+                            <span>What We</span>
+                            <span className="relative text-blue-500">
+                                Build
+                                {/* Horizontal light sweep */}
+                                <motion.div
+                                    initial={{ left: "-100%" }}
+                                    whileInView={{ left: "100%" }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.6, duration: 1.2, ease: "easeInOut" }}
+                                    className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-full w-[50%] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
+                                />
+                            </span>
+                        </motion.h2>
+                    </div>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-muted-foreground text-xl max-w-3xl font-light"
+                        transition={{ delay: 0.15, duration: 0.6 }}
+                        className="text-white/40 text-xl max-w-2xl font-light leading-relaxed"
                     >
                         Real-world platforms solving real operational challenges. Each solution is architected for scale, security, and long-term evolution.
                     </motion.p>
                 </div>
 
-                {/* Cinematic grid with 3D effects */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Cinematic grid with asymmetric entrance */}
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                >
                     {useCases.map((useCase, index) => (
-                        <motion.div
-                            key={useCase.title}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{
-                                delay: index * 0.1,
-                                duration: 0.8,
-                                ease: [0.25, 0.4, 0.25, 1]
-                            }}
-                            onHoverStart={() => setHoveredIndex(index)}
-                            onHoverEnd={() => setHoveredIndex(null)}
-                            className="group relative bg-card/50 backdrop-blur-sm border border-white/5 rounded-3xl p-8 overflow-hidden hover:border-accent/40 transition-all duration-500 cursor-pointer"
-                            style={{
-                                transform: hoveredIndex === index
-                                    ? "perspective(1000px) rotateX(-2deg) rotateY(2deg) translateZ(20px)"
-                                    : "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)",
-                                transition: "transform 0.5s cubic-bezier(0.25, 0.4, 0.25, 1)"
-                            }}
-                        >
-                            {/* Cinematic gradient background */}
-                            <motion.div
-                                className={`absolute inset-0 bg-gradient-to-br ${useCase.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
-                                initial={false}
-                            />
-
-                            {/* Glow effect on hover */}
-                            {hoveredIndex === index && (
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent pointer-events-none"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.5 }}
-                                />
-                            )}
-
-                            <div className="relative z-10">
-                                {/* Icon with cinematic reveal */}
-                                <motion.div
-                                    className="relative w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 overflow-hidden"
-                                    whileHover={{ scale: 1.1, rotate: 5 }}
-                                    transition={{ type: "spring", stiffness: 300 }}
-                                >
-                                    <motion.div
-                                        className="absolute inset-0 bg-accent/20 blur-xl"
-                                        animate={{
-                                            scale: hoveredIndex === index ? [1, 1.3, 1] : 1,
-                                            opacity: hoveredIndex === index ? [0.5, 0.9, 0.5] : 0.5
-                                        }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: hoveredIndex === index ? Infinity : 0,
-                                            ease: "easeInOut"
-                                        }}
-                                    />
-                                    <useCase.icon className="w-7 h-7 text-accent relative z-10" />
-                                </motion.div>
-
-                                <h3 className="text-2xl font-black mb-4 uppercase tracking-tight leading-tight">
-                                    {useCase.title}
-                                </h3>
-                                <p className="text-muted-foreground leading-relaxed mb-6 font-light">
-                                    {useCase.description}
-                                </p>
-
-                                {/* Tags with stagger animation */}
-                                <div className="flex flex-wrap gap-2">
-                                    {useCase.tags.map((tag, i) => (
-                                        <motion.span
-                                            key={i}
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: index * 0.1 + 0.3 + i * 0.05 }}
-                                            whileHover={{ scale: 1.05, y: -2 }}
-                                            className="px-3 py-1 bg-white/5 rounded-full text-xs font-medium border border-white/5 group-hover:border-accent/30 transition-colors flex items-center gap-1"
-                                        >
-                                            <Sparkles className="w-2.5 h-2.5" />
-                                            {tag}
-                                        </motion.span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Architectural corner accent */}
-                            <div className="absolute top-0 right-0 w-24 h-24 opacity-20 group-hover:opacity-40 transition-opacity">
-                                <svg viewBox="0 0 100 100" className="w-full h-full">
-                                    <motion.path
-                                        d="M 0 0 L 100 0 L 100 100 Z"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="0.5"
-                                        className="text-accent"
-                                        initial={{ pathLength: 0 }}
-                                        whileInView={{ pathLength: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1 + 0.5, duration: 0.8 }}
-                                    />
-                                </svg>
-                            </div>
-                        </motion.div>
+                        <UseCaseCard key={useCase.title} useCase={useCase} index={index} />
                     ))}
-                </div>
+                </motion.div>
             </motion.div>
         </section>
     );
