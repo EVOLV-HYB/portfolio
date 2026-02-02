@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useCausality } from "../_context/CausalityContext";
 
 const steps = [
     {
@@ -36,6 +37,13 @@ const steps = [
 ];
 
 export default function Lifecycle() {
+    const { triggerTrail } = useCausality();
+
+    const handleMouseEnter = (e: React.MouseEvent, targetId: string) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        triggerTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, targetId);
+    };
+
     return (
         <section className="py-24 px-6 bg-card border-y border-white/5">
             <div className="container max-w-7xl mx-auto">
@@ -69,7 +77,8 @@ export default function Lifecycle() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.15 }}
-                                className="relative group"
+                                onMouseEnter={(e) => handleMouseEnter(e, "signals")}
+                                className="relative group cursor-default"
                             >
                                 {/* Node Point */}
                                 <div className="hidden lg:block w-4 h-4 rounded-full bg-card border-2 border-white/20 absolute top-[3.25rem] -translate-y-1/2 left-0 group-hover:border-accent group-hover:scale-125 transition-all z-10">

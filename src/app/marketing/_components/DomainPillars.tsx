@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Compass, PenTool, Users, BarChart } from "lucide-react";
+import { useCausality } from "../_context/CausalityContext";
+import ResolutionReveal from "./ResolutionReveal";
 
 const pillars = [
     {
@@ -79,6 +81,13 @@ const pillars = [
 ];
 
 export default function DomainPillars() {
+    const { triggerTrail } = useCausality();
+
+    const handleMouseEnter = (e: React.MouseEvent, targetId: string) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        triggerTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, targetId);
+    };
+
     return (
         <section className="py-24 px-6 bg-muted/20">
             <div className="container max-w-7xl mx-auto">
@@ -93,49 +102,51 @@ export default function DomainPillars() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {pillars.map((pillar, index) => (
-                        <motion.div
+                        <ResolutionReveal
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="bg-card border border-white/5 rounded-3xl p-6 group hover:border-accent/30 transition-all flex flex-col h-full"
+                            delay={index * 0.1}
+                            className="h-full"
                         >
-                            <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${pillar.color}`}>
-                                <pillar.icon className="w-6 h-6" />
-                            </div>
-
-                            <h3 className="text-xl font-bold mb-3 leading-tight">{pillar.title}</h3>
-                            <p className="text-sm text-accent font-medium mb-6 italic border-l-2 border-accent/20 pl-3">
-                                &quot;{pillar.tagline}&quot;
-                            </p>
-
-                            <div className="space-y-6 flex-grow">
-                                <div>
-                                    <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Covers</h4>
-                                    <ul className="space-y-2">
-                                        {pillar.covers.map((item, i) => (
-                                            <li key={i} className="text-sm text-foreground/80 flex items-start gap-2">
-                                                <span className="w-1 h-1 bg-white/20 rounded-full mt-2" />
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
+                            <div
+                                onMouseEnter={(e) => handleMouseEnter(e, "lifecycle")}
+                                className="bg-card border border-white/5 rounded-3xl p-6 group hover:border-accent/30 transition-all flex flex-col h-full hover:shadow-[0_0_20px_rgba(37,99,235,0.1)]"
+                            >
+                                <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${pillar.color}`}>
+                                    <pillar.icon className="w-6 h-6" />
                                 </div>
 
-                                <div className="pt-6 border-t border-white/5">
-                                    <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Examples</h4>
-                                    <ul className="space-y-2">
-                                        {pillar.examples.map((item, i) => (
-                                            <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                                                <span className="w-1 h-1 bg-accent/40 rounded-full mt-2" />
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                <h3 className="text-xl font-bold mb-3 leading-tight">{pillar.title}</h3>
+                                <p className="text-sm text-accent font-medium mb-6 italic border-l-2 border-accent/20 pl-3">
+                                    &quot;{pillar.tagline}&quot;
+                                </p>
+
+                                <div className="space-y-6 flex-grow">
+                                    <div>
+                                        <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Covers</h4>
+                                        <ul className="space-y-2">
+                                            {pillar.covers.map((item, i) => (
+                                                <li key={i} className="text-sm text-foreground/80 flex items-start gap-2">
+                                                    <span className="w-1 h-1 bg-white/20 rounded-full mt-2" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <div className="pt-6 border-t border-white/5">
+                                        <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Examples</h4>
+                                        <ul className="space-y-2">
+                                            {pillar.examples.map((item, i) => (
+                                                <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                                                    <span className="w-1 h-1 bg-accent/40 rounded-full mt-2" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </motion.div>
+                        </ResolutionReveal>
                     ))}
                 </div>
             </div>
