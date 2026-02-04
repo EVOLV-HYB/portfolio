@@ -21,7 +21,7 @@ export default function TechLabHero() {
         <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-6 overflow-hidden">
             {/* Cinematic Infrastructure Grid */}
             <motion.div
-                className="absolute inset-0 z-0"
+                className="absolute inset-0 z-0 accelerate will-change-transform"
                 style={{ y: yBackground, scale }}
             >
                 {/* Animated connection lines - digital infrastructure */}
@@ -113,7 +113,7 @@ export default function TechLabHero() {
 
             {/* Cinematic glow layers */}
             <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/10 rounded-full blur-[150px] opacity-40"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/10 rounded-full blur-[80px] opacity-40 will-change-transform"
                 style={{ y: yBackground }}
                 animate={{
                     scale: [1, 1.1, 1],
@@ -128,7 +128,7 @@ export default function TechLabHero() {
 
             {/* Editorial content with cinematic reveal */}
             <motion.div
-                className="container relative z-10 max-w-6xl mx-auto text-center"
+                className="container relative z-10 max-w-6xl mx-auto text-center will-change-transform"
                 style={{ y: yContent, opacity }}
             >
                 <motion.div
