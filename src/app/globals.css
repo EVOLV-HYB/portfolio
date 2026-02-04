@@ -50,5 +50,18 @@
   .grid-pattern {
     background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
     background-size: 32px 32px;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .accelerate {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }
