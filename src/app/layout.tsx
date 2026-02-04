@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SmoothScrollProvider from "@/components/providers/SmoothScroll";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} antialiased bg-background text-foreground overflow-x-hidden`}>
-        <div className="fixed inset-0 grid-pattern pointer-events-none opacity-50" />
-        <div className="fixed inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-transparent pointer-events-none" />
-        <main className="relative z-10">
-          {children}
-        </main>
+        <SmoothScrollProvider>
+          <div className="fixed inset-0 grid-pattern pointer-events-none opacity-50" />
+          <div className="fixed inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-transparent pointer-events-none" />
+          <main className="relative z-10">
+            {children}
+          </main>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

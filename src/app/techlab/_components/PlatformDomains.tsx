@@ -125,11 +125,11 @@ export default function PlatformDomains() {
 
                 <motion.div
                     style={{ x: orb1X }}
-                    className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none"
+                    className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[80px] pointer-events-none will-change-transform"
                 />
                 <motion.div
                     style={{ x: orb2X }}
-                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[150px] pointer-events-none"
+                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[80px] pointer-events-none will-change-transform"
                 />
 
                 <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
@@ -162,7 +162,7 @@ export default function PlatformDomains() {
                 </motion.div>
 
                 {/* The Horizontal Moving Track */}
-                <motion.div style={{ x }} className="flex gap-12 px-12 md:pl-[600px] md:pr-48 relative z-10">
+                <motion.div style={{ x }} className="flex gap-12 px-12 md:pl-[600px] md:pr-48 relative z-10 accelerate will-change-transform">
                     {domains.map((domain, index) => (
                         <div
                             key={index}
