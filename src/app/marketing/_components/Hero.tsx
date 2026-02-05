@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle, Users, Heart, Share2, BarChart3 } from "lucide-react";
 import HybridIntelligenceField from "./HybridIntelligenceField";
+import ScrambleText from "@/components/shared/ScrambleText";
 
 export default function Hero() {
   return (
@@ -51,14 +52,11 @@ export default function Hero() {
 
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1]">
             <span className="block mb-2">We build social</span>
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-accent text-glow"
-            >
-              ecosystems
-            </motion.span>
+            <ScrambleText
+              text="ecosystems"
+              className="text-accent text-glow block"
+              delay={0.5}
+            />
             <span className="block text-3xl md:text-5xl text-muted-foreground mt-2 font-bold">not just content calendars.</span>
           </h1>
 

@@ -27,6 +27,9 @@ export default function HybridIntelligenceField() {
         let mouseX = -1000;
         let mouseY = -1000;
 
+        let lastScrollY = window.scrollY;
+        let scrollVelocity = 0;
+
         // Configuration
         const NODE_COUNT = 60;
         const CONNECTION_DISTANCE = 150;
@@ -60,11 +63,18 @@ export default function HybridIntelligenceField() {
         const draw = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Calculate scroll velocity
+            const currentScrollY = window.scrollY;
+            const deltaY = currentScrollY - lastScrollY;
+            scrollVelocity = deltaY * 0.1; // Damping
+            lastScrollY = currentScrollY;
+
             // Update and draw nodes
             nodes.forEach((node, i) => {
-                // Organic movement
+                // Organic movement + Scroll Warp
+                // When scrolling fast, nodes stretch/move vertically
                 node.baseX += node.vx;
-                node.baseY += node.vy;
+                node.baseY += node.vy - scrollVelocity; // Move opposite to scroll for parallax feel
 
                 // Wrap around screen
                 if (node.baseX < 0) node.baseX = canvas.width;
@@ -90,9 +100,13 @@ export default function HybridIntelligenceField() {
                 node.x += (node.baseX - node.x) * RETURN_STRENGTH;
                 node.y += (node.baseY - node.y) * RETURN_STRENGTH;
 
+                // Warp visual effect
+                const warpFactor = 1 + Math.abs(scrollVelocity) * 0.5;
+
                 // Draw Node
                 ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                // Stretch nodes vertically based on velocity
+                ctx.ellipse(node.x, node.y, node.radius, node.radius * warpFactor, 0, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(37, 99, 235, ${0.4 + Math.random() * 0.2})`; // Blueish flicker
                 ctx.fill();
 

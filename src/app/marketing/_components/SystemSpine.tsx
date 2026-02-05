@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const sections = [
     { id: "hero", label: "Start" },
@@ -21,6 +21,9 @@ export default function SystemSpine() {
         damping: 30,
         restDelta: 0.001
     });
+
+    const [packet, setPacket] = useState({ active: false, config: { duration: 1, delay: 0 } });
+    const prevSectionRef = useRef("hero");
 
     useEffect(() => {
         const handleScroll = () => {
@@ -46,7 +49,12 @@ export default function SystemSpine() {
                 }
             });
 
-            setActiveSection(current);
+            if (current !== activeSection) {
+                setActiveSection(current);
+                // Trigger packet
+                setPacket({ active: true, config: { duration: 0.8, delay: 0 } });
+                setTimeout(() => setPacket(p => ({ ...p, active: false })), 800);
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -54,7 +62,7 @@ export default function SystemSpine() {
         handleScroll();
 
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [activeSection]);
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
@@ -72,6 +80,16 @@ export default function SystemSpine() {
             {/* Note: Simply mapping progress to height might not align perfectly with nodes if spacing varies, 
                 but for a "spine" feel, a glowing pulse or just tracking active nodes is often cleaner than a full progress bar overlay. 
                 Let's stick to the prompt's "pulse of light" and active node glow. */}
+
+            {/* The Active Signal Packet */}
+            {packet.active && (
+                <motion.div
+                    initial={{ top: "0%", opacity: 0 }}
+                    animate={{ top: "100%", opacity: [0, 1, 0] }}
+                    transition={{ duration: 0.8, ease: "linear" }}
+                    className="absolute left-[8px] -translate-x-1/2 w-1.5 h-12 bg-gradient-to-b from-transparent via-accent to-transparent z-0 blur-[2px]"
+                />
+            )}
 
             {sections.map((section) => {
                 const isActive = activeSection === section.id;
