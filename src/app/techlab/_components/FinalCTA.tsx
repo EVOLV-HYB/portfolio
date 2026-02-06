@@ -44,7 +44,7 @@ export default function FinalCTA() {
 
             {/* Floating orbs */}
             <motion.div
-                className="absolute top-1/4 left-1/4 w-64 h-64 bg-accent/10 rounded-full blur-[100px]"
+                className="absolute top-1/4 left-1/4 w-64 h-64 bg-accent/10 rounded-full blur-[50px] will-change-transform"
                 animate={{
                     x: [0, 50, 0],
                     y: [0, -30, 0],
@@ -57,7 +57,7 @@ export default function FinalCTA() {
                 }}
             />
             <motion.div
-                className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-violet-500/10 rounded-full blur-[100px]"
+                className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-violet-500/10 rounded-full blur-[50px] will-change-transform"
                 animate={{
                     x: [0, -50, 0],
                     y: [0, 30, 0],
@@ -184,7 +184,7 @@ export default function FinalCTA() {
 
                     {/* Cinematic pulse */}
                     <motion.div
-                        className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/20 rounded-full blur-[120px] pointer-events-none"
+                        className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/20 rounded-full blur-[60px] pointer-events-none will-change-transform"
                         animate={{
                             scale: [1, 1.2, 1],
                             opacity: [0.3, 0.5, 0.3]

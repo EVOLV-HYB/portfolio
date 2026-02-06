@@ -203,16 +203,16 @@ export default function UseCases() {
         >
             {/* Cinematic Background with slow parallax */}
             <motion.div
-                className="absolute inset-0 opacity-10 pointer-events-none"
+                className="absolute inset-0 opacity-10 pointer-events-none will-change-transform"
                 style={{ y: orbsY }}
             >
-                <div className="absolute top-20 left-[-5%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]" />
-                <div className="absolute bottom-20 right-[-5%] w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[120px]" />
+                <div className="absolute top-20 left-[-5%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[60px]" />
+                <div className="absolute bottom-20 right-[-5%] w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[60px]" />
                 <motion.div className="absolute inset-0 grid-pattern opacity-[0.03]" style={{ y: gridY }} />
             </motion.div>
 
             <motion.div
-                className="container max-w-7xl mx-auto relative z-10"
+                className="container max-w-7xl mx-auto relative z-10 will-change-transform"
                 style={{ opacity: exitOpacity, scale: exitScale }}
             >
                 {/* Editorial header */}

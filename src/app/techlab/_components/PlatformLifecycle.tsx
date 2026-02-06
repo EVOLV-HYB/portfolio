@@ -52,15 +52,15 @@ export default function PlatformLifecycle() {
         <section ref={containerRef} className="py-32 px-6 bg-muted/30 relative overflow-hidden">
             {/* Cinematic background parallax elements */}
             <motion.div
-                className="absolute inset-0 opacity-20 pointer-events-none"
+                className="absolute inset-0 opacity-20 pointer-events-none will-change-transform"
                 style={{ y: yOrbs }}
             >
-                <div className="absolute top-40 left-[-10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-40 right-[-10%] w-96 h-96 bg-violet-500/10 rounded-full blur-[120px]" />
+                <div className="absolute top-40 left-[-10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[60px]" />
+                <div className="absolute bottom-40 right-[-10%] w-96 h-96 bg-violet-500/10 rounded-full blur-[60px]" />
             </motion.div>
 
             <motion.div
-                className="container max-w-6xl mx-auto relative z-10"
+                className="container max-w-6xl mx-auto relative z-10 will-change-transform"
                 style={{ y: yContent, opacity }}
             >
                 <div className="mb-20 text-center">

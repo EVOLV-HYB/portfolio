@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Network, Zap, Shield, TrendingUp } from "lucide-react";
 import { useRef } from "react";
 
@@ -32,48 +32,13 @@ const principles = [
 ];
 
 export default function EngineeringPrinciples() {
+    // We keep the ref in case you need it for other observers, 
+    // but the scroll-linked transform logic is gone.
     const sectionRef = useRef<HTMLElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start end", "end start"]
-    });
-
-    const yBackground = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-    const yContent = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     return (
         <section ref={sectionRef} className="py-32 px-6 relative overflow-hidden bg-background z-20">
-            {/* Cinematic background parallax elements */}
-            <motion.div
-                className="absolute inset-0 opacity-20 pointer-events-none"
-                style={{ y: yBackground }}
-            >
-                <div className="absolute top-20 right-[5%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]" />
-                <div className="absolute bottom-20 left-[5%] w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]" />
-                <div className="absolute inset-0 grid-pattern opacity-10" />
-            </motion.div>
-
-            <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none"
-                animate={{
-                    backgroundPosition: ["0% 0%", "100% 100%"],
-                }}
-                transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                }}
-            />
-
-            {/* Architectural dividers */}
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-
-            <motion.div
-                className="container max-w-6xl mx-auto relative z-10"
-                style={{ y: yContent, opacity }}
-            >
+            <motion.div className="container max-w-6xl mx-auto relative z-10">
                 {/* Editorial header */}
                 <div className="mb-20">
                     <motion.div
@@ -125,9 +90,7 @@ export default function EngineeringPrinciples() {
                             className="group relative bg-card/50 backdrop-blur-sm border border-white/5 rounded-3xl p-8 hover:border-accent/40 transition-all duration-500 overflow-hidden"
                         >
                             {/* Cinematic gradient */}
-                            <motion.div
-                                className={`absolute inset-0 bg-gradient-to-br ${principle.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
-                            />
+                            <div className={`absolute inset-0 bg-gradient-to-br ${principle.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
                             {/* Architectural accent line */}
                             <motion.div
