@@ -19,6 +19,7 @@ export default function Navigation() {
                 </Link>
 
                 <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+                    <Link href="/consultancy" className="hover:text-foreground transition-colors">Consultancy</Link>
                     <Link href="#process" className="hover:text-foreground transition-colors">Diagnostic</Link>
                     <Link href="#domains" className="hover:text-foreground transition-colors">Domains</Link>
                     <Link href="#work" className="hover:text-foreground transition-colors">Case Studies</Link>
