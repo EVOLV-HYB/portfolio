@@ -5,10 +5,10 @@ import { motion, useScroll, useTransform, useVelocity } from "framer-motion";
 import { useSpring } from "@react-spring/web";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { VerticalJourneyLine } from "@/components/marketing/VerticalJourneyLine";
-import { PhilosophyGlow } from "@/components/marketing/PhilosophyGlow";
-import { MarketingGallery } from "@/components/marketing/MarketingGallery";
-import { RoleConstellation } from "@/components/marketing/RoleConstellation";
+import { VerticalJourneyLine } from "@/app/marketing/_components/VerticalJourneyLine";
+import { PhilosophyGlow } from "@/app/marketing/_components/PhilosophyGlow";
+import { MarketingGallery } from "@/app/marketing/_components/MarketingGallery";
+import { RoleConstellation } from "@/app/marketing/_components/RoleConstellation";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
