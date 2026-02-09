@@ -23,7 +23,7 @@
   --color-border: var(--border);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  
+
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -32,6 +32,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground selection:bg-accent/30;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -42,7 +43,7 @@
   .glass {
     @apply bg-card/40 backdrop-blur-md border border-white/5;
   }
-  
+
   .text-glow {
     text-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
   }
