@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-export default function MarketingPage() {
-    return (
-        <div className="min-h-screen bg-black flex items-center justify-center">
-            <h1 className="text-4xl font-black text-white/20 uppercase tracking-widest">Marketing</h1>
-        </div>
-=======
 import Navigation from "@/components/shared/Navigation";
 import Hero from "./_components/Hero";
 import DomainPillars from "./_components/DomainPillars";
@@ -62,6 +55,5 @@ export default function MarketingPage() {
                 </footer>
             </div>
         </CausalityProvider>
->>>>>>> dharaneesh
     );
 }

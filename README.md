@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HY — Root to Result
 
-## Getting Started
+![Hy Agency Cover](https://via.placeholder.com/1200x400/0a0a0a/2563eb?text=HY+AGENCY)
 
-First, run the development server:
+> **Hybrid Problem-Solving & Innovation Agency.**  
+> We bridge the gap between high-level strategy and pixel-perfect execution.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Welcome to the digital home of **Hy Agency**. This platform serves as both our portfolio and our primary interface for demonstrating our cross-domain capabilities—from systemic problem solving to high-performance engineering.
+
+## 🚀 The Stack
+
+Built with a focus on **performance**, **aesthetic precision**, and **developer experience**.
+
+-   **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+-   **Language:** [TypeScript](https://www.typescriptlang.org/)
+-   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+-   **Motion:** [Framer Motion](https://www.framer.com/motion/)
+-   **Icons:** [Lucide React](https://lucide.dev/)
+
+## 📂 Architecture
+
+We employ a modular, domain-driven architecture. Each core capability has its own dedicated route and component ecosystem, ensuring separation of concerns and scalability.
+
+```
+src/
+├── app/
+│   ├── marketing/           # Social Media & Community Management
+│   ├── techlab/             # Web & Platform Engineering
+│   ├── product/             # Product & Startup Building
+│   ├── consultancy/         # Strategy & Advisory
+│   ├── content/             # content & Creative Systems
+│   ├── globals.css          # Global design system
+│   └── page.tsx             # Main gateway
+├── components/
+│   ├── sections/            # Reusable page sections (Hero, BentoGrid)
+│   └── shared/              # Shared UI primitives (Navigation, Footers)
+└── lib/
+    └── domains.ts           # Central service configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Core Domains
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Our work is organized into interconnected pillars, each represented by a dedicated digital experience:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **[Social Media & Community](/marketing):** Building living, breathing social ecosystems.
+2.  **[Web & Platform Engineering](/techlab):** High-performance digital foundations.
+3.  **[Product Building](/product):** From concept to MVP to scale.
+4.  **[Consulting](/consultancy):** Partner-level strategy to navigate bottlenecks.
+5.  **[Content Systems](/content):** High-volume creative engines.
 
-## Learn More
+## ⚡ Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+Ensure you have [Node.js](https://nodejs.org/) installed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/EVOLV-HYB/portfolio.git
+    cd portfolio
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-## Deploy on Vercel
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  **Open your browser:**
+    Navigate to [http://localhost:3000](http://localhost:3000) to see the system in action.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Design Philosophy
+
+-   **System Over Slides:** We don't just design; we build systems that work.
+-   **Aesthetics with Purpose:** Every animation, gradient, and interaction serves a function.
+-   **Performance First:** Zero layout shift, optimized assets, and snappy interactions.
+
+---
+
+© 2026 HY AGENCY. All rights reserved.  
+*Systematic Excellence.*
