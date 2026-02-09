@@ -20,7 +20,19 @@ export default function BentoGrid() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {domains.map((domain, index) => {
-                        const isSocialMedia = domain.title === "Social Media and Community Management";
+                        const getLink = (title: string) => {
+                            switch (title) {
+                                case "Content and Creative Systems": return "/contentlab";
+                                case "Social Media and Community Management": return "/social-media";
+                                case "Web & Platform Engineering": return "/techlab";
+                                case "Consulting & Advisory": return "/consultancy";
+                                case "Product and Startup Building": return "/product";
+                                default: return null;
+                            }
+                        };
+
+                        const href = getLink(domain.title);
+
                         const CardContent = (
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
@@ -28,8 +40,8 @@ export default function BentoGrid() {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.05 }}
                                 className={cn(
-                                    "group relative bg-card border border-white/5 rounded-3xl p-8 overflow-hidden transition-all hover:border-accent/30",
-                                    isSocialMedia && "cursor-pointer",
+                                    "group relative bg-card border border-white/5 rounded-3xl p-8 overflow-hidden transition-all hover:border-accent/30 h-full",
+                                    href && "cursor-pointer",
                                     domain.className
                                 )}
                             >
@@ -57,12 +69,8 @@ export default function BentoGrid() {
                             </motion.div>
                         );
 
-                        return isSocialMedia ? (
-                            <Link
-                                key={domain.title}
-                                href="/marketing"
-                                className="block"
-                            >
+                        return href ? (
+                            <Link key={domain.title} href={href} className="block">
                                 {CardContent}
                             </Link>
                         ) : (
