@@ -9,7 +9,6 @@ import Signals from "./_components/Signals";
 import SystemSpine from "./_components/SystemSpine";
 import { CausalityProvider } from "./_context/CausalityContext";
 import CausalityLayer from "./_components/CausalityLayer";
-
 export default function MarketingPage() {
     return (
         <CausalityProvider>
