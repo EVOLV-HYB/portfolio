@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Navigation from "@/components/shared/Navigation";
 import IntakeForm from "@/components/sections/IntakeForm";
+import { cn } from "@/lib/utils";
 import {
     ArrowRight,
     BarChart3,
@@ -18,7 +19,9 @@ import {
     Layers,
     Users,
     Lightbulb,
-    Rocket
+    Rocket,
+    XCircle,
+    Phone
 } from "lucide-react";
 
 // --- DATA ---
@@ -114,7 +117,7 @@ const engagementProcess = [
 
 // --- COMPONENTS ---
 
-// 1. HERO SECTION (Preserved)
+// 1. HERO SECTION
 function HeroSection() {
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
@@ -137,7 +140,7 @@ function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 leading-[0.9]"
+                    className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 leading-[0.9] uppercase"
                 >
                     FROM <span className="text-muted-foreground">CHAOS</span><br />
                     TO <span className="text-accent relative inline-block">
@@ -182,10 +185,10 @@ function HeroSection() {
 // 2. CLIENT PAIN POINTS
 function PainPointsSection() {
     return (
-        <section className="py-24 px-6 bg-secondary/20 relative">
+        <section className="py-32 px-6 bg-muted/30 relative">
             <div className="container mx-auto max-w-6xl">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+                <div className="text-center mb-20">
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight uppercase">
                         Are These Challenges <br />
                         <span className="text-accent">Holding Your Business Back?</span>
                     </h2>
@@ -201,10 +204,10 @@ function PainPointsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-red-500/20 transition-all duration-300 group"
+                            className="p-8 rounded-2xl bg-card border border-white/5 hover:border-accent/40 transition-all duration-300 group"
                         >
-                            <point.icon className="w-10 h-10 text-muted-foreground mb-4 group-hover:text-red-400 transition-colors" />
-                            <h3 className="text-xl font-bold mb-3">{point.title}</h3>
+                            <point.icon className="w-10 h-10 text-muted-foreground mb-4 group-hover:text-accent transition-colors" />
+                            <h3 className="text-xl font-bold mb-3 uppercase tracking-tight">{point.title}</h3>
                             <p className="text-muted-foreground text-sm leading-relaxed">{point.description}</p>
                         </motion.div>
                     ))}
@@ -219,21 +222,21 @@ function FrameworkSection() {
     const [activeStep, setActiveStep] = useState(0);
 
     return (
-        <section className="py-24 px-6 border-t border-white/5 bg-black/40">
+        <section className="py-32 px-6 border-t border-white/5 bg-background">
             <div className="container mx-auto max-w-6xl">
-                <div className="flex flex-col md:flex-row gap-16 items-center">
+                <div className="flex flex-col md:flex-row gap-16 items-start">
                     {/* Left: Interactive List */}
-                    <div className="flex-1 space-y-8">
+                    <div className="flex-1 space-y-8 sticky top-24">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
+                            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight uppercase">
                                 Our <span className="text-accent">Problem-Solving Framework</span>.
                             </h2>
                             <p className="text-lg text-muted-foreground leading-relaxed">
-                                A systematic, 5-step methodology designed to dismantle complexity and engineeer growth.
+                                A systematic, 5-step methodology designed to dismantle complexity and engineer growth.
                             </p>
                         </motion.div>
 
@@ -242,10 +245,12 @@ function FrameworkSection() {
                                 <div
                                     key={step.id}
                                     onClick={() => setActiveStep(step.id)}
-                                    className={`group cursor-pointer p-5 rounded-xl border transition-all duration-300 relative overflow-hidden ${activeStep === step.id
-                                        ? "bg-accent/5 border-accent/20"
-                                        : "bg-white/5 border-white/5 hover:border-white/10"
-                                        }`}
+                                    className={cn(
+                                        "group cursor-pointer p-5 rounded-xl border transition-all duration-300 relative overflow-hidden",
+                                        activeStep === step.id
+                                            ? "bg-accent/5 border-accent/20"
+                                            : "bg-card border-white/5 hover:border-white/10"
+                                    )}
                                 >
                                     <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${activeStep === step.id ? "bg-accent" : "bg-transparent"}`} />
                                     <div className="flex items-center gap-4">
@@ -253,7 +258,10 @@ function FrameworkSection() {
                                             <step.icon className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className={`text-lg font-bold transition-colors ${activeStep === step.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"}`}>
+                                            <h3 className={cn(
+                                                "text-lg font-bold transition-colors uppercase tracking-tight",
+                                                activeStep === step.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                                            )}>
                                                 {step.title}
                                             </h3>
                                         </div>
@@ -278,7 +286,7 @@ function FrameworkSection() {
                     </div>
 
                     {/* Right: Visual Display */}
-                    <div className="flex-1 w-full aspect-square md:aspect-auto md:h-[600px] relative perspective-1000">
+                    <div className="flex-1 w-full aspect-square md:aspect-auto md:min-h-[600px] relative perspective-1000">
                         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent rounded-3xl blur-2xl" />
                         <div className="relative w-full h-full bg-card/50 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden flex items-center justify-center p-12">
                             <div className="absolute inset-0 grid-pattern opacity-20" />
@@ -315,17 +323,17 @@ function FrameworkSection() {
 // 4. WHAT MAKES US DIFFERENT
 function DifferentiatorsSection() {
     return (
-        <section className="py-24 px-6 relative overflow-hidden">
+        <section className="py-32 px-6 relative overflow-hidden bg-muted/20">
             <div className="container mx-auto max-w-6xl">
-                <div className="mb-16">
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+                <div className="mb-20">
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight uppercase">
                         Not Just Advisory. <br /><span className="text-accent">Strategic Partners.</span>
                     </h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {differentiators.map((diff, idx) => (
-                        <div key={idx} className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                            <h3 className="text-xl font-bold mb-3 text-white">{diff.title}</h3>
+                        <div key={idx} className="p-8 rounded-2xl bg-card border border-white/5 hover:border-accent/30 transition-all duration-300">
+                            <h3 className="text-xl font-bold mb-3 text-white uppercase tracking-tight">{diff.title}</h3>
                             <p className="text-muted-foreground leading-relaxed">{diff.description}</p>
                         </div>
                     ))}
@@ -338,10 +346,10 @@ function DifferentiatorsSection() {
 // 5. TYPES OF PROBLEMS WE SOLVE
 function ServicesSection() {
     return (
-        <section className="py-24 px-6 bg-secondary/10">
+        <section className="py-32 px-6 bg-background">
             <div className="container mx-auto max-w-6xl">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Types of Problems We Solve</h2>
+                <div className="text-center mb-20">
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight uppercase">Types of Problems We Solve</h2>
                     <p className="text-muted-foreground text-lg">Comprehensive solutions for critical business domains.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -358,7 +366,7 @@ function ServicesSection() {
                                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300">
                                     <service.icon className="w-6 h-6" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                                <h3 className="text-xl font-bold mb-3 uppercase tracking-tight">{service.title}</h3>
                                 <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground transition-colors duration-300">
                                     {service.description}
                                 </p>
@@ -374,12 +382,12 @@ function ServicesSection() {
 // 6. WHO WE WORK BEST WITH
 function IdealClientsSection() {
     return (
-        <section className="py-24 px-6">
+        <section className="py-32 px-6 bg-muted/30">
             <div className="container mx-auto max-w-4xl text-center">
-                <h2 className="text-3xl md:text-5xl font-black mb-12 tracking-tight">Who We Work Best With</h2>
+                <h2 className="text-3xl md:text-5xl font-black mb-12 tracking-tight uppercase">Who We Work Best With</h2>
                 <div className="grid gap-4">
                     {idealClients.map((client, idx) => (
-                        <div key={idx} className="p-6 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center">
+                        <div key={idx} className="p-6 rounded-xl border border-white/10 bg-card flex items-center justify-center hover:border-accent/30 transition-all">
                             <span className="text-lg md:text-xl font-medium text-white">{client}</span>
                         </div>
                     ))}
@@ -392,18 +400,18 @@ function IdealClientsSection() {
 // 7. ENGAGEMENT PROCESS
 function EngagementSection() {
     return (
-        <section className="py-24 px-6 border-y border-white/5 bg-black/40">
+        <section className="py-32 px-6 border-y border-white/5 bg-background">
             <div className="container mx-auto max-w-6xl">
-                <div className="mb-16">
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">How We Engage</h2>
+                <div className="mb-20 text-center md:text-left">
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight uppercase">How We Engage</h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {engagementProcess.map((item, idx) => (
-                        <div key={idx} className="relative p-6">
-                            <span className="text-6xl font-black text-white/5 absolute top-0 left-0 -z-10">{item.step}</span>
-                            <div className="text-xl font-bold mt-8 mb-2 text-accent">{item.title}</div>
+                        <div key={idx} className="relative p-6 group">
+                            <span className="text-6xl font-black text-muted/10 absolute top-0 left-0 -z-10 transition-colors group-hover:text-accent/10">{item.step}</span>
+                            <div className="text-xl font-bold mt-8 mb-2 text-accent uppercase tracking-tight">{item.title}</div>
                             {idx < engagementProcess.length - 1 && (
-                                <div className="hidden md:block absolute top-1/2 right-0 w-8 h-[1px] bg-white/20" />
+                                <div className="hidden md:block absolute top-1/2 right-0 w-8 h-[1px] bg-white/10" />
                             )}
                         </div>
                     ))}
@@ -416,15 +424,15 @@ function EngagementSection() {
 // 8. TRUST BUILDING & 9. FINAL CTA
 function FinalSection() {
     return (
-        <section className="py-32 px-6 relative overflow-hidden">
+        <section className="py-40 px-6 relative overflow-hidden">
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent/10 rounded-full blur-[120px]" />
             </div>
             <div className="container mx-auto max-w-3xl text-center relative z-10">
-                <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tight">
-                    "Think of us as your strategic partner in solving critical business challenges."
+                <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter uppercase leading-none">
+                    "Think of us as your strategic partner."
                 </h2>
-                <p className="text-xl text-muted-foreground mb-12">
+                <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
                     Every complex problem has a strategic solution. Let's build yours.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -434,6 +442,35 @@ function FinalSection() {
                     >
                         Book a Strategic Consultation
                         <ArrowRight className="w-5 h-5" />
+                    </a>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+// 9. DIRECT CONTACT
+function DirectContactSection() {
+    return (
+        <section className="py-12 px-6 bg-background">
+            <div className="container mx-auto max-w-4xl">
+                <div className="rounded-2xl bg-accent/5 border border-accent/20 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left transition-all hover:bg-accent/10 hover:border-accent/30 group">
+                    <div>
+                        <h3 className="text-2xl font-black uppercase tracking-tight mb-2">
+                            Need Immediate Assistance?
+                        </h3>
+                        <p className="text-muted-foreground">
+                            Skip the form. Call our strategy team directly.
+                        </p>
+                    </div>
+                    <a
+                        href="tel:+15551234567"
+                        className="flex items-center gap-4 text-2xl md:text-3xl font-black text-accent hover:text-white transition-colors uppercase tracking-tight"
+                    >
+                        <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                            <Phone className="w-6 h-6" />
+                        </div>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">+1 (555) 123-4567</span>
                     </a>
                 </div>
             </div>
@@ -453,6 +490,7 @@ export default function ConsultancyPage() {
             <IdealClientsSection />
             <EngagementSection />
             <FinalSection />
+            <DirectContactSection />
             <div id="intake">
                 {/* Reusing existing IntakeForm as the functional contact point */}
                 <IntakeForm />
