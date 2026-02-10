@@ -16,7 +16,6 @@ export default function Home() {
       <CaseStudies />
       <WhyUs />
       <IntakeForm />
-      <Footer />
     </div>
   );
 }

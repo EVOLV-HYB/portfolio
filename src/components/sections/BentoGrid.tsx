@@ -27,6 +27,7 @@ export default function BentoGrid() {
                                 case "Web & Platform Engineering": return "/techlab";
                                 case "Consulting & Advisory": return "/consultancy";
                                 case "Product and Startup Building": return "/product";
+                                case "Marketing Infrastructure": return "/marketing";
                                 default: return null;
                             }
                         };
