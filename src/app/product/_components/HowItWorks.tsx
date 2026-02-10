@@ -1,200 +1,160 @@
 "use client";
-import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useAnimation } from 'framer-motion';
-import { FaChevronRight, FaCheck, FaInfoCircle } from 'react-icons/fa';
-import GradientText from './ui/GradientText';
-import ParticleBackground from './ui/ParticleBackground';
 
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useState, useRef } from "react";
+import { Hammer, Rocket, Target, Users } from "lucide-react";
+import ParticleSystem from "./Extras/ParticleSystem";
 
-const HowItWorks = () => {
-    const targetRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: targetRef,
-    });
+const steps = [
+    { id: 1, title: "Ideation", icon: Target, desc: "Refine your concept with data-backed market analysis." },
+    { id: 2, title: "Development", icon: Hammer, desc: "Forge a robust MVP with our elite engineering squads." },
+    { id: 3, title: "Presentation", icon: Users, desc: "Perfect your pitch and connect with top-tier investors." },
+    { id: 4, title: "Investment", icon: Rocket, desc: "Secure the capital needed to scale your vision globally." },
+];
 
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]); // Extended scroll range
+function CubeStep({ step, isActive, onClick, index }: { step: typeof steps[0]; isActive: boolean; onClick: () => void; index: number }) {
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+    const mouseXSpring = useSpring(x);
+    const mouseYSpring = useSpring(y);
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["30deg", "-30deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-30deg", "30deg"]);
 
-    const steps = [
-        {
-            id: 1,
-            number: '01',
-            title: 'Consultation',
-            desc: 'Deep dive session to map out your startup roadmap.',
-            example: 'Outcome: 5-year strategic plan.',
-            hidden: 'We analyze your market, competitors, and technical feasibility to ensure a solid foundation.'
-        },
-        {
-            id: 2,
-            number: '02',
-            title: 'Ideation',
-            desc: 'We brainstorm innovative solutions tailored to you.',
-            example: 'Outcome: 3 Unique Value Propositions.',
-            hidden: 'Our design thinking workshops generate creative solutions that stand out in the crowded market.'
-        },
-        {
-            id: 3,
-            number: '03',
-            title: 'Prototyping',
-            desc: 'Rapid wireframing and clickable mockups.',
-            example: 'Outcome: High-fidelity Figma Prototype.',
-            hidden: 'Visualize the end product before writing a single line of code. Save time and reduce risk.'
-        },
-        {
-            id: 4,
-            number: '04',
-            title: 'Development',
-            desc: 'Agile development with bi-weekly sprints.',
-            example: 'Outcome: Scalable MVP ready for launch.',
-            hidden: 'We use the latest tech stack (React, Node, Python) to build secure and scalable applications.'
-        },
-        {
-            id: 5,
-            number: '05',
-            title: 'Launch',
-            desc: 'Go-to-market strategy and deployment.',
-            example: 'Outcome: 10k+ Signups in Day One.',
-            hidden: 'From AWS setup to App Store submission, we handle the entire launch process.'
-        },
-    ];
-
-    return (
-        <section ref={targetRef} className="works-section-wrapper" id="how-it-works">
-            <div className="works-sticky-container">
-
-                {/* New Particle Background Component */}
-                <ParticleBackground count={15} color="rgba(0, 123, 255, 0.4)" opacity={0.3} />
-
-                <h2 className="section-title text-gradient mobile-title">How It Works</h2>
-                <ProgressRing progress={scrollYProgress} />
-
-                <div className="horizontal-track-container">
-                    <motion.div style={{ x }} className="horizontal-track">
-
-
-                        {steps.map((step) => (
-                            <StepCard key={step.id} step={step} />
-                        ))}
-
-                        <div className="launch-text">
-                            READY TO LAUNCH
-                        </div>
-
-                        <div className="cta-card">
-                            <h3>Ready to Launch?</h3>
-                            <motion.button
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="btn"
-                            >
-                                Start Now
-                            </motion.button>
-                        </div>
-
-                        {/* Spacer to ensure full visibility */}
-                        <div style={{ minWidth: '200px', height: '1px' }}></div>
-                    </motion.div>
-                </div>
-            </div>
-
-            <div className="mobile-works-list">
-                <h2 className="section-title text-gradient">How It Works</h2>
-                {steps.map((step) => (
-                    <MobileStepKey key={step.id} step={step} />
-                ))}
-            </div>
-        </section>
-    );
-};
-
-const StepCard = ({ step }: { step: any }) => {
-    const controls = useAnimation();
-
-    const handleDragEnd = (event: any, info: any) => {
-        // If dragged more than 50px to left, snap to -200 (reveal)
-        // Otherwise snap back to 0 (close)
-        if (info.offset.x < -50) {
-            controls.start({ x: -280 }); // Fully reveal content
-        } else {
-            controls.start({ x: 0 });
-        }
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        x.set((e.clientX - rect.left) / rect.width - 0.5);
+        y.set((e.clientY - rect.top) / rect.height - 0.5);
     };
 
     return (
-        <div className="step-card-wrapper">
-            {/* Hidden Layer (Revealed by Drag) */}
-            <div className="card-hidden-layer">
-                <FaInfoCircle className="info-icon" />
-                <p>{step.hidden}</p>
-                <button
-                    className="close-reveal-btn"
-                    onClick={() => controls.start({ x: 0 })}
-                >
-                    Close
-                </button>
-            </div>
-
-            {/* Draggable Top Layer */}
+        <motion.div
+            onClick={onClick}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() => { x.set(0); y.set(0); }}
+            className={`relative cursor-pointer transition-all duration-700 ${isActive ? "scale-110 z-20" : "scale-90 opacity-50 z-10"}`}
+            style={{ perspective: "1000px" }}
+        >
             <motion.div
-                className="step-card-horizontal"
-                drag="x"
-                dragConstraints={{ left: -280, right: 0 }}
-                dragElastic={0.2}
-                onDragEnd={handleDragEnd}
-                animate={controls}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ cursor: 'grabbing' }}
+                animate={{
+                    rotateX: isActive ? rotateX.get() : "0deg",
+                    rotateY: isActive ? rotateY.get() : "0deg",
+                    translateY: isActive ? -20 : 0
+                }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                style={{ transformStyle: "preserve-3d" }}
+                className="w-48 h-48 md:w-64 md:h-64 relative group"
             >
-                <div className="step-number">{step.number}</div>
-                <div className="step-content">
-                    <h3><GradientText colors={["#fff", "#007BFF", "#fff"]}>{step.title}</GradientText></h3>
-                    <p>{step.desc}</p>
-                    <div className="step-example-tag">
-                        <FaCheck size={12} /> {step.example}
-                    </div>
+                {/* Cube Faces */}
+                <div className={`absolute inset-0 bg-card border-2 flex flex-col items-center justify-center p-6 rounded-2xl transition-all duration-500 ${isActive ? "border-accent shadow-[0_0_50px_rgba(0,123,255,0.4)]" : "border-white/10"}`}>
+                    <step.icon size={64} className={`${isActive ? "text-accent" : "text-white/40"} transition-colors mb-4`} />
+                    <h3 className="text-xl font-bold">{step.title}</h3>
+
+                    {/* Orbiting Particle Ring */}
+                    {isActive && (
+                        <div className="absolute inset-0 pointer-events-none">
+                            {Array.from({ length: 8 }).map((_, i) => (
+                                <motion.div
+                                    key={i}
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 3 + i, repeat: Infinity, ease: "linear" }}
+                                    className="absolute inset-0"
+                                >
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-accent rounded-full blur-[2px]" />
+                                </motion.div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
-                <div className="drag-hint">
-                    &larr; Drag to Reveal
-                </div>
+                {/* Cube Side (Glassy) */}
+                <div
+                    style={{ transform: "rotateY(90deg) translateZ(128px)" }}
+                    className="absolute inset-0 bg-accent/20 backdrop-blur-md border border-accent/20 rounded-2xl md:block hidden"
+                />
+                <div
+                    style={{ transform: "rotateX(90deg) translateZ(128px)" }}
+                    className="absolute inset-0 bg-accent/10 backdrop-blur-sm border border-accent/10 rounded-2xl md:block hidden"
+                />
             </motion.div>
-
-            <div className="card-connector">
-                <FaChevronRight />
-            </div>
-        </div>
+        </motion.div>
     );
-};
-
-const MobileStepKey = ({ step }: { step: any }) => {
-    return (
-        <div className="mobile-step-item">
-            <div className="mobile-step-number">{step.number}</div>
-            <div>
-                <h3>{step.title}</h3>
-                <p>{step.desc}</p>
-            </div>
-        </div>
-    )
 }
 
-const ProgressRing = ({ progress }: { progress: any }) => {
-    return (
-        <div className="progress-ring-container">
-            <svg width="60" height="60" viewBox="0 0 60 60">
-                <circle cx="30" cy="30" r="26" stroke="#333" strokeWidth="4" fill="transparent" />
-                <motion.circle
-                    cx="30"
-                    cy="30"
-                    r="26"
-                    stroke="#007BFF"
-                    strokeWidth="4"
-                    fill="transparent"
-                    style={{ pathLength: progress }}
-                />
-            </svg>
-            <span className="progress-text">Flow</span>
-        </div>
-    );
-};
+export default function HowItWorks() {
+    const [activeStep, setActiveStep] = useState(0);
 
-export default HowItWorks;
+    return (
+        <section id="how" className="py-24 bg-[#121212] relative overflow-hidden">
+            {/* Unique Section Background: Orbiting Rings */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-50 flex items-center justify-center">
+                {[...Array(3)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+                        transition={{
+                            rotate: { duration: 10 + i * 5, repeat: Infinity, ease: "linear" },
+                            scale: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+                        }}
+                        className="absolute border border-accent/20 rounded-full"
+                        style={{
+                            width: `${30 + i * 20}vw`,
+                            height: `${30 + i * 20}vw`,
+                            borderStyle: i % 2 === 0 ? "solid" : "dashed"
+                        }}
+                    >
+                        <motion.div
+                            animate={{ opacity: [0.2, 0.5, 0.2] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                            className="absolute top-0 left-1/2 w-4 h-4 bg-accent rounded-full blur-[2px]"
+                        />
+                    </motion.div>
+                ))}
+            </div>
+
+            <div className="container mx-auto px-6 relative z-10 text-center">
+                <h2 className="text-4xl md:text-5xl font-bold mb-16">Forge Path</h2>
+
+                <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-16">
+                    {steps.map((step, i) => (
+                        <CubeStep
+                            key={step.id}
+                            step={step}
+                            index={i}
+                            isActive={activeStep === i}
+                            onClick={() => setActiveStep(i)}
+                        />
+                    ))}
+                </div>
+
+                <div className="max-w-2xl mx-auto min-h-[150px]">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeStep}
+                            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                            className="bg-card p-8 rounded-3xl border border-white/10 relative overflow-hidden group"
+                        >
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                                <Target size={120} className="text-accent" />
+                            </div>
+                            <h4 className="text-accent font-bold uppercase tracking-widest text-sm mb-4">Phase 0{activeStep + 1}</h4>
+                            <p className="text-xl text-white/80 leading-relaxed relative z-10">
+                                {steps[activeStep].desc}
+                            </p>
+                            {/* 3D Progress Bar */}
+                            <div className="absolute bottom-0 left-0 h-1 bg-accent/50 w-full">
+                                <motion.div
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "100%" }}
+                                    transition={{ duration: 5 }}
+                                    className="h-full bg-accent shadow-[0_0_15px_#007BFF]"
+                                />
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </div>
+        </section>
+    );
+}

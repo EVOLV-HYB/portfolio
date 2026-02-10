@@ -19,13 +19,13 @@ export default function Navigation() {
                 </Link>
 
                 <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-                    <Link href="#process" className="hover:text-foreground transition-colors">Diagnostic</Link>
-                    <Link href="#domains" className="hover:text-foreground transition-colors">Domains</Link>
-                    <Link href="#work" className="hover:text-foreground transition-colors">Case Studies</Link>
+                    <Link href="/#process" className="hover:text-foreground transition-colors">Diagnostic</Link>
+                    <Link href="/#domains" className="hover:text-foreground transition-colors">Domains</Link>
+                    <Link href="/#work" className="hover:text-foreground transition-colors">Case Studies</Link>
                 </div>
 
                 <Link
-                    href="#intake"
+                    href="/#intake"
                     className="bg-accent text-accent-foreground px-4 py-1.5 rounded-full text-sm font-bold hover:bg-accent/90 transition-all hover:scale-105 active:scale-95"
                 >
                     Submit Problem
