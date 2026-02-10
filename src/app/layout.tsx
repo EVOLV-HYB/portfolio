@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScroll";
-
+import Footer from "../components/shared/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,6 +23,7 @@ export default function RootLayout({
           <div className="fixed inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-transparent pointer-events-none" />
           <main className="relative z-10">
             {children}
+            <Footer />
           </main>
         </SmoothScrollProvider>
       </body>

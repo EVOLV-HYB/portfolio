@@ -9,6 +9,7 @@ import Signals from "./_components/Signals";
 import SystemSpine from "./_components/SystemSpine";
 import { CausalityProvider } from "./_context/CausalityContext";
 import CausalityLayer from "./_components/CausalityLayer";
+import ContentCTA from "@/components/shared/ContentCTA";
 export default function MarketingPage() {
     return (
         <CausalityProvider>
@@ -41,17 +42,7 @@ export default function MarketingPage() {
                     </section>
                 </main>
 
-                <footer className="border-t border-white/5 py-12 px-6 mt-20 relative z-10 bg-background">
-                    <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-                        <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 bg-accent rounded-lg" />
-                            <span className="font-bold tracking-tight">HY AGENCY</span>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                            © {new Date().getFullYear()} HY Hybrid Problem-Solving. Systematic Excellence.
-                        </p>
-                    </div>
-                </footer>
+                <ContentCTA />
             </div>
         </CausalityProvider>
     );

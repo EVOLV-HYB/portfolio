@@ -5,6 +5,7 @@ import { useState } from "react";
 import Navigation from "@/components/shared/Navigation";
 import IntakeForm from "@/components/sections/IntakeForm";
 import { cn } from "@/lib/utils";
+import ContentCTA from "@/components/shared/ContentCTA";
 import {
     ArrowRight,
     BarChart3,
@@ -491,22 +492,7 @@ export default function ConsultancyPage() {
             <EngagementSection />
             <FinalSection />
             <DirectContactSection />
-            <div id="intake">
-                {/* Reusing existing IntakeForm as the functional contact point */}
-                <IntakeForm />
-            </div>
-
-            <footer className="border-t border-white/5 py-12 px-6">
-                <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-accent rounded-lg" />
-                        <span className="font-bold tracking-tight">HY AGENCY</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                        © {new Date().getFullYear()} HY Hybrid Problem-Solving. Systematic Excellence.
-                    </p>
-                </div>
-            </footer>
+            <ContentCTA />
         </div>
     );
 }

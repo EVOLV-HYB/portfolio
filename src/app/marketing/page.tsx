@@ -9,7 +9,7 @@ import { VerticalJourneyLine } from "@/app/marketing/_components/VerticalJourney
 import { PhilosophyGlow } from "@/app/marketing/_components/PhilosophyGlow";
 import { MarketingGallery } from "@/app/marketing/_components/MarketingGallery";
 import { RoleConstellation } from "@/app/marketing/_components/RoleConstellation";
-
+import ContentCTA from "@/components/shared/ContentCTA";
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -660,23 +660,10 @@ export default function MarketingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 px-6 bg-linear-to-r from-accent/10 to-accent/5">
-        <motion.div
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          variants={stagger}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <motion.h2 {...fadeInUp} className="text-5xl font-bold mb-8">
-            Let's Solve the Right Problem
-          </motion.h2>
-          <motion.div {...fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button spark>Submit Your Problem</Button>
-            <Button variant="secondary">Start a Conversation</Button>
-          </motion.div>
-        </motion.div>
-      </section>
+      
+        <ContentCTA />
+   
+    
     </div>
   );
 }
