@@ -109,6 +109,7 @@ Intake Responses:
             );
             setSubmitted(true);
         } catch (error) {
+            console.log(error);
             setErrorMessage("Failed to send inquiry. Please try again or email us directly at evolvhybagency@gmail.com");
         } finally {
             setIsSending(false);
