@@ -3,16 +3,13 @@
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import Header from "./_components/Header";
 import Hero from "./_components/Hero";
 import AboutUs from "./_components/AboutUs";
 import Services from "./_components/Services";
 import HowItWorks from "./_components/HowItWorks";
 import Teams from "./_components/Teams";
-import Contact from "./_components/Contact";
-import Footer from "./_components/Footer";
 import ParticleTrail from "./_components/Extras/ParticleTrail";
-
+import ContentCTA from "@/components/shared/ContentCTA";
 // Load custom cursor client-side only
 const BlueCircleCursor = dynamic(() => import("./_components/Extras/BlueCircleCursor"), { ssr: false });
 
@@ -22,7 +19,6 @@ const sections = [
     { id: "services", component: Services },
     { id: "how", component: HowItWorks },
     { id: "teams", component: Teams },
-    { id: "contact", component: Contact },
 ];
 
 export default function Home() {
@@ -36,7 +32,6 @@ export default function Home() {
         <main ref={containerRef} className="min-h-screen bg-[#121212] text-foreground selection:bg-accent selection:text-white overflow-hidden relative">
             <ParticleTrail />
             <BlueCircleCursor />
-            <Header />
             {sections.map(({ id, component: Component }, i) => {
                 const yRange = i % 2 === 0 ? [0, -100] : [0, 100];
                 const y = useTransform(scrollYProgress, [0, 1], yRange);
@@ -49,13 +44,13 @@ export default function Home() {
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, delay: 0.1 }}
                         style={{ y }}
-                        className="relative z-10 py-10"
+                        className="relative z-10"
                     >
                         <Component />
                     </motion.div>
                 );
             })}
-            <Footer />
+            <ContentCTA />
         </main>
     );
 }

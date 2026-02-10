@@ -143,7 +143,7 @@ export default function Hero() {
         <section
             ref={containerRef}
             id="home"
-            className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-[#121212]"
+            className="relative min-h-screen flex items-center overflow-hidden pt-0 bg-[#121212]"
         >
             <MorphingBlobs />
             <ParticleSwarm count={50} />

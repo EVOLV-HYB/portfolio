@@ -1,7 +1,8 @@
 "use client";
 
-import { ReactLenis } from 'lenis/react';
-import { ReactNode } from 'react';
+
+import { ReactNode, version } from 'react';
+import { ReactLenis } from '@studio-freight/react-lenis';
 
 export default function SmoothScrollProvider({ children }: { children: ReactNode }) {
     return (
@@ -13,7 +14,7 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
             touchMultiplier: 2,
             infinite: false,
         }}>
-            {children}
+            {children as any}
         </ReactLenis>
     );
 }
