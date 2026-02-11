@@ -38,13 +38,6 @@ const steps = [
       "Deploy, integrate, and activate solutions across channels to ensure smooth adoption and immediate impact.",
     color: "text-blue-700",
   },
-  {
-    icon: TrendingUp,
-    title: "Optimize",
-    description:
-      "Measure performance, refine processes, and scale continuously to maximize long-term growth and results.",
-    color: "text-blue-800",
-  },
 ];
 
 export default function Process() {

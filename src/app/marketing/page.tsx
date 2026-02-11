@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useVelocity } from "framer-motion";
-import { useSpring } from "@react-spring/web";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { VerticalJourneyLine } from "@/app/marketing/_components/VerticalJourneyLine";
@@ -426,22 +425,6 @@ export default function MarketingPage() {
         </motion.div>
       </section>
 
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6">
-        <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="glass px-6 py-3 rounded-full flex items-center gap-8 border-white/10"
-        >
-          <Link href="/" className="font-bold tracking-tight text-lg">HY</Link>
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <Link href="#diagnostic" className="hover:text-foreground transition-colors">Diagnostic</Link>
-            <Link href="#growth" className="hover:text-foreground transition-colors">Growth</Link>
-            <Link href="#case-studies" className="hover:text-foreground transition-colors">Case Studies</Link>
-          </div>
-          <Button spark>Submit Problem</Button>
-        </motion.div>
-      </nav>
 
       {/* The Problem */}
       <section className="py-20 px-6">

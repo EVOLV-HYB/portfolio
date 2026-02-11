@@ -9,12 +9,12 @@ const Footer = () => {
 
     const sections = {
         services: [
-            "Content Creation",
-            "Social Media Management",
-            "Digital Marketing",
-            "Web & App Development",
-            "Product Building",
-            "Consulting",
+            { name: "Content Creation", href: "/contentlab" },
+            { name: "Social Media Management", href: "/social-media" },
+            { name: "Digital Marketing", href: "/marketing" },
+            { name: "Web & App Development", href: "/techlab" },
+            { name: "Product Building", href: "/product" },
+            { name: "Consulting", href: "/consultancy" },
         ],
         quickLinks: [
             { name: "Home", href: "/" },
@@ -53,13 +53,13 @@ const Footer = () => {
                         <h4 className="text-foreground font-semibold mb-6">Services</h4>
                         <ul className="space-y-3">
                             {sections.services.map((service) => (
-                                <li key={service}>
+                                <li key={service.name}>
                                     <Link
-                                        href="#services"
+                                        href={service.href}
                                         className="text-muted-foreground hover:text-accent transition-colors text-sm flex items-center group"
                                     >
                                         <span className="w-0 group-hover:w-2 h-[1px] bg-accent transition-all mr-0 group-hover:mr-2" />
-                                        {service}
+                                        {service.name}
                                     </Link>
                                 </li>
                             ))}

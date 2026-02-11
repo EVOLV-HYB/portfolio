@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import Navigation from "@/components/shared/Navigation";
 import IntakeForm from "@/components/sections/IntakeForm";
 import { cn } from "@/lib/utils";
 import ContentCTA from "@/components/shared/ContentCTA";
@@ -482,7 +481,7 @@ function DirectContactSection() {
 export default function ConsultancyPage() {
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
-            <Navigation />
+        
             <HeroSection />
             <PainPointsSection />
             <FrameworkSection />

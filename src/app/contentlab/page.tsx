@@ -3,12 +3,11 @@ import ShootingProduction from "./_components/ShootingProduction";
 import GraphicDesign from "./_components/GraphicDesign";
 import VideoEditing from "./_components/VideoEditing";
 import ContentCTA from "./_components/ContentCTA";
-import Navigation from "@/components/shared/Navigation";
 
 export default function ContentPage() {
     return (
         <div className="min-h-screen bg-black text-white selection:bg-accent/30 selection:text-white">
-            <Navigation />
+        
 
             <main>
                 {/* Section 1: Domain Overview */}

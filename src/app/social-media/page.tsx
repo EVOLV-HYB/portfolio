@@ -1,4 +1,3 @@
-import Navigation from "@/components/shared/Navigation";
 import Hero from "./_components/Hero";
 import DomainPillars from "./_components/DomainPillars";
 import Philosophy from "./_components/Philosophy";
@@ -15,7 +14,6 @@ export default function MarketingPage() {
         <CausalityProvider>
             <div className="flex flex-col min-h-screen bg-background text-foreground relative">
                 <CausalityLayer />
-                <Navigation />
                 <SystemSpine />
 
                 <main className="flex-grow">

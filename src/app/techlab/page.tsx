@@ -5,12 +5,11 @@ import PlatformLifecycle from "./_components/PlatformLifecycle";
 import UseCases from "./_components/UseCases";
 import TechStack from "./_components/TechStack";
 import ContentCTA from "@/components/shared/ContentCTA";
-import Navigation from "@/components/shared/Navigation";
 
 export default function TechLabPage() {
     return (
         <div className="flex flex-col min-h-screen">
-            <Navigation />
+
             <TechLabHero />
             <PlatformDomains />
             <EngineeringPrinciples />
