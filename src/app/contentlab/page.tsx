@@ -26,10 +26,6 @@ export default function ContentPage() {
                 {/* Section 5: Final CTA */}
                 <ContentCTA />
             </main>
-
-            <footer className="border-t border-white/10 py-12 bg-black text-center text-gray-600 text-sm">
-                <p>&copy; {new Date().getFullYear()} EVOLV Content & Creative. All rights reserved.</p>
-            </footer>
         </div>
     );
 }

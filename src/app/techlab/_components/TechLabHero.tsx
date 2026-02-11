@@ -147,7 +147,7 @@ export default function TechLabHero() {
 
                 {/* Cinematic headline with stagger */}
                 <div className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.95]">
-                    {["Platform", "Engineering", "for", "Scalable,", "Intelligent", "Businesses"].map((word, i) => (
+                    {["Techlab", "Solutions", "for", "Scalable,", "Intelligent", "Businesses"].map((word, i) => (
                         <motion.span
                             key={i}
                             initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
