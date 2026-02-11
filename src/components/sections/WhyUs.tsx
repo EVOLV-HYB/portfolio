@@ -64,7 +64,8 @@ export default function WhyUs() {
                         >
                             <p className="text-xl font-black mb-4 uppercase italic tracking-tighter">The Bottom Line:</p>
                             <p className="text-lg opacity-90 leading-relaxed font-medium">
-                                We are partners, not vendors. We challenge bad thinking, expose hidden friction, and build the systems that give you leverage. No buzzwords. Just results.
+                                We are partners, not vendors.We unite strategy, design, and technology under one roof to create real business impact.
+Partner with us to launch smarter, grow faster, and evolve continuously.
                             </p>
                         </motion.div>
                     </div>

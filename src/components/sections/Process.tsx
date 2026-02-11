@@ -1,33 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, PenTool, Rocket, ShieldCheck } from "lucide-react";
+import {
+  Search,
+  Lightbulb,
+  Hammer,
+  Rocket,
+  TrendingUp
+} from "lucide-react";
 
 const steps = [
-    {
-        icon: Search,
-        title: "Audit",
-        description: "Expose friction and root causes. We peel back the layers of your operations to find why you're stuck.",
-        color: "text-blue-400",
-    },
-    {
-        icon: PenTool,
-        title: "Architect",
-        description: "Design the system, not just the fix. We build blueprint protocols that solve for the long term.",
-        color: "text-blue-500",
-    },
-    {
-        icon: Rocket,
-        title: "Execute",
-        description: "Build, deploy, integrate. Our engineers and strategists turn the blueprint into reality.",
-        color: "text-blue-600",
-    },
-    {
-        icon: ShieldCheck,
-        title: "Integrate",
-        description: "Make it sustainable and scalable. We ensure the solution lives within your culture and stacks.",
-        color: "text-blue-700",
-    },
+  {
+    icon: Search,
+    title: "Discover",
+    description:
+      "Understand goals, audit systems, and uncover root problems through research, analysis, and stakeholder insights.",
+    color: "text-blue-400",
+  },
+  {
+    icon: Lightbulb,
+    title: "Strategize",
+    description:
+      "Design a clear roadmap and solution architecture combining creativity, technology, and growth strategy.",
+    color: "text-blue-500",
+  },
+  {
+    icon: Hammer,
+    title: "Build",
+    description:
+      "Develop content, platforms, and systems with precision, turning ideas into real, working solutions.",
+    color: "text-blue-600",
+  },
+  {
+    icon: Rocket,
+    title: "Launch",
+    description:
+      "Deploy, integrate, and activate solutions across channels to ensure smooth adoption and immediate impact.",
+    color: "text-blue-700",
+  },
+  {
+    icon: TrendingUp,
+    title: "Optimize",
+    description:
+      "Measure performance, refine processes, and scale continuously to maximize long-term growth and results.",
+    color: "text-blue-800",
+  },
 ];
 
 export default function Process() {
@@ -36,10 +53,10 @@ export default function Process() {
             <div className="container max-w-6xl mx-auto">
                 <div className="mb-20 text-center md:text-left">
                     <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 uppercase">
-                        The Diagnostic
+                        The Process Plan
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-2xl">
-                        A precise, deliberate methodology designed to move from ambiguity to absolute operational clarity.
+                        A precise, deliberate methodology designed to move from ambiguity problem to absolute operational solution.
                     </p>
                 </div>
 

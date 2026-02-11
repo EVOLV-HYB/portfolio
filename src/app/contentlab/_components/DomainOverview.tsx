@@ -8,22 +8,22 @@ const services = [
     {
         title: "Video Shoot",
         icon: Video,
-        desc: "Cinematic commercials & storytelling."
+        desc: "Cinematic commercials and storytelling."
     },
     {
         title: "Photo Shoot",
         icon: Camera,
-        desc: "High-end editorial & product photography."
+        desc: "High-end editorial and product photography."
     },
     {
         title: "Graphic Designing",
         icon: PenTool,
-        desc: "Visual identity & brand systems."
+        desc: "Visual identity and brand systems."
     },
     {
         title: "Video Editing",
         icon: Film,
-        desc: "Post-production & motion graphics."
+        desc: "Post-production editing and motion graphics."
     }
 ];
 
@@ -120,8 +120,7 @@ export default function DomainOverview() {
                     className="max-w-2xl text-center"
                 >
                     <p className="text-lg text-gray-400 leading-relaxed font-light">
-                        We are the visual engineers of your brand. From concept to final cut, we create high-impact content that defines your identity and captivates your audience across every channel.
-                    </p>
+                        ContentLab is EVOLV’s dedicated creative studio, delivering videos, graphics, branding, and digital content that help businesses communicate better and grow faster. We turn ideas into compelling visuals that inform, engage, and convert.</p>
                 </motion.div>
 
             </div>

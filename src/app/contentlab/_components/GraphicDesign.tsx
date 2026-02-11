@@ -7,10 +7,10 @@ import { PenTool, Layers, Layout, ArrowRight, MoveRight } from "lucide-react";
 const designSteps = [
     {
         id: 1,
-        title: "Brand Strategy & Visuals",
+        title: "Brand Strategy and Visuals",
         desc: "We define the core essence of your brand, creating a visual language that resonates with your target audience through logos, typography, and color theory.",
-        icon: PenTool,
-        image: "/content/portfolio_visual.png", // Use available asset
+        icon: Layers,
+        image: "/e690e216-740d-46fc-b192-39b7f88b3569.jpeg", // Use available asset
         color: "bg-blue-500"
     },
     {
@@ -18,15 +18,15 @@ const designSteps = [
         title: "Marketing Collaterals",
         desc: "From social media sets to high-conversion ads, we design assets that drive engagement and tell your brand story across all digital touchpoints.",
         icon: Layers,
-        image: "/content/portfolio_visual.png",
+        image: "/825b491b-071a-492d-8690-beb7ca0f800b.jpeg",
         color: "bg-cyan-500"
     },
     {
         id: 3,
         title: "Presentation Engineering",
         desc: "Transforming complex data into persuasive narratives. We build investor decks and internal presentations that win hearts and minds.",
-        icon: Layout,
-        image: "/content/portfolio_visual.png",
+        icon: Layers,
+        image: "/graphic designer.jpeg",
         color: "bg-indigo-500"
     }
 ];
@@ -115,10 +115,6 @@ export default function GraphicDesign() {
                                         {step.desc}
                                     </p>
                                     <div className="pt-4">
-                                        <button className="flex items-center gap-3 text-white font-black uppercase text-xs tracking-widest group">
-                                            Learn More
-                                            <div className="w-8 h-[2px] bg-white group-hover:w-12 transition-all duration-300" />
-                                        </button>
                                     </div>
                                 </motion.div>
 

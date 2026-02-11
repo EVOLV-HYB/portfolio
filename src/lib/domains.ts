@@ -27,9 +27,9 @@ export interface Domain {
 
 export const domains: Domain[] = [
     {
-        title: "Content and Creative Systems",
-        slug: slugify("Content and Creative Systems"),
-        description: "Architecting high-volume content engines that drive authority without manual overhead.",
+        title: "Content and Creative Lab",
+        slug: slugify("Content and Creative Lab"),
+        description: "Crafting compelling visuals and stories that capture attention and elevate brand identity.",
         icon: MessageSquare,
         iconName: "MessageSquare",
         className: "md:col-span-2",
@@ -43,8 +43,8 @@ export const domains: Domain[] = [
     },
     {
         title: "Social Media and Community Management",
-        slug: "social-media-and-community-management",
-        description: "Systematic distribution protocols that scale reach and resonance across every platform.",
+        slug: slugify("Social Media and Community Management"),
+        description: "Building consistent online presence and engaged communities that turn followers into loyal customers.",
         icon: Share2,
         iconName: "Share2",
         className: "md:col-span-1",
@@ -57,9 +57,9 @@ export const domains: Domain[] = [
         }
     },
     {
-        title: "Marketing Infrastructure",
-        slug: slugify("Marketing Infrastructure"),
-        description: "The plumbing of growth. CRM, automation, and funnel orchestration built for scale.",
+        title: "Marketing and Growth",
+        slug: slugify("Marketing and Growth"),
+        description: "Driving measurable growth through smart strategy, targeted campaigns, and performance-focused marketing.",
         icon: BarChart3,
         iconName: "BarChart3",
         className: "md:col-span-1",
@@ -72,9 +72,9 @@ export const domains: Domain[] = [
         }
     },
     {
-        title: "Web & Platform Engineering",
-        slug: slugify("Web & Platform Engineering"),
-        description: "High-performance digital foundations. Fast, accessible, and system-integrated.",
+        title: "Tech Lab",
+        slug: slugify("Tech Lab"),
+        description: "Designing and developing fast, scalable digital platforms that power modern businesses.",
         icon: Code2,
         iconName: "Code2",
         className: "md:col-span-2",
@@ -87,9 +87,9 @@ export const domains: Domain[] = [
         }
     },
     {
-        title: "Product and Startup Building",
-        slug: slugify("Product and Startup Building"),
-        description: "From concept to MVP to scale. We build tools that solve specific operational needs.",
+        title: "Venture Forge",
+        slug: slugify("Venture Forge"),
+        description: "Transforming ideas into real-world products through rapid prototyping, MVPs, and scalable solutions.",
         icon: Cpu,
         iconName: "Cpu",
         className: "md:col-span-1",
@@ -102,9 +102,9 @@ export const domains: Domain[] = [
         }
     },
     {
-        title: "Consulting & Advisory",
-        slug: slugify("Consulting & Advisory"),
-        description: "Partner-level strategy to navigate bottlenecks and architect growth loops.",
+        title: "Consulting and Problem Analysis",
+        slug: slugify("Consulting and Problem Analysis"),
+        description: "Analyzing challenges deeply and delivering structured, end-to-end solutions that create lasting impact.",
         icon: Layout,
         iconName: "Layout",
         className: "md:col-span-2",

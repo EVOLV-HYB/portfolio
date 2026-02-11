@@ -13,10 +13,10 @@ export default function Home() {
       <Hero />
       <Process />
       <BentoGrid />
-      <CaseStudies />
       <WhyUs />
       <IntakeForm />
       <Footer />
     </div>
   );
 }
+

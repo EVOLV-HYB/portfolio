@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Play, Film, MoveRight, Monitor, Cpu, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { Play, Film, MoveRight, Monitor, Cpu, Sparkles, X } from "lucide-react";
 
 const workflow = [
-    { step: "01", title: "Ingestion", desc: "RAW footage sync & organization" },
+    { step: "01", title: "Initial Analysis", desc: "RAW footage sync & organization" },
     { step: "02", title: "Editing", desc: "A-Roll cutting & narrative flow" },
     { step: "03", title: "Motion", desc: "VFX, Titles & dynamic graphics" },
     { step: "04", title: "Color", desc: "Cinematic grading & correction" },
@@ -40,6 +41,8 @@ const itemVariants = {
 };
 
 export default function VideoEditing() {
+    const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
     return (
         <section className="relative bg-[#050505] py-32 overflow-hidden border-t border-white/5">
 
@@ -88,10 +91,18 @@ export default function VideoEditing() {
                     {/* Main Video */}
                     <motion.div
                         variants={itemVariants}
+                        onClick={() => setSelectedVideo("/Attention X Anjaan_._Edited By___ippo.edits_ _._.__fyp _explorepage _anjaan _surya _attention(MP4).mp4")}
                         className="md:col-span-8 relative rounded-3xl overflow-hidden bg-zinc-900 group cursor-pointer border border-white/10"
                     >
                         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10" />
-                        <img src="/content/portfolio_visual.png" alt="Featured Showreel" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                        <video
+                            src="/Attention X Anjaan_._Edited By___ippo.edits_ _._.__fyp _explorepage _anjaan _surya _attention(MP4).mp4"
+                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        />
 
                         {/* Play Button Pulse */}
                         <div className="absolute inset-0 flex items-center justify-center z-20">
@@ -114,15 +125,26 @@ export default function VideoEditing() {
 
                     {/* Secondary Clips */}
                     <div className="md:col-span-4 flex flex-col gap-6">
-                        {[1, 2].map((i) => (
+                        {[
+                            "/Follow me for more_ _ippotobz ___cars _lightning _lightningmcqueen _mater _mcqueen _movie _film _edit _fyp _fypシ _viral _parati(MP4).mp4",
+                            "/Master X velichapoove . . ._.___ippo.edits__.__thalapathyvijay _jd _master _fypageシ _explore _fypviral(MP4).mp4"
+                        ].map((src, i) => (
                             <motion.div
                                 key={i}
                                 variants={itemVariants}
                                 whileHover={{ scale: 1.02 }}
+                                onClick={() => setSelectedVideo(src)}
                                 className="relative flex-1 rounded-3xl overflow-hidden bg-zinc-900 group cursor-pointer border border-white/10"
                             >
                                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10" />
-                                <img src="/content/portfolio_visual.png" alt={`Clip ${i}`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                                <video
+                                    src={src}
+                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                />
                                 <div className="absolute inset-0 flex items-center justify-center z-20">
                                     <div className="w-14 h-14 bg-white/10 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-all">
                                         <Play className="w-5 h-5 text-white fill-white ml-1" />
@@ -181,6 +203,43 @@ export default function VideoEditing() {
                 </motion.div>
 
             </div>
+
+            {/* Video Modal Overlay */}
+            <AnimatePresence>
+                {selectedVideo && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-2xl"
+                    >
+                        <motion.button
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0, opacity: 0 }}
+                            onClick={() => setSelectedVideo(null)}
+                            className="absolute top-6 right-6 md:top-12 md:right-12 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center border border-white/20 hover:bg-white/20 transition-all z-[110]"
+                        >
+                            <X className="w-6 h-6 text-white" />
+                        </motion.button>
+
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            className="relative w-full max-w-5xl h-auto aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_100px_-20px_rgba(59,130,246,0.3)] bg-zinc-900"
+                        >
+                            <video
+                                src={selectedVideo}
+                                className="w-full h-full object-contain"
+                                autoPlay
+                                controls
+                                playsInline
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
