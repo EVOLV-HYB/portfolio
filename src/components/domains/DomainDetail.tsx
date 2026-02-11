@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, MessageSquare, Share2, BarChart3, Code2, Cpu, Layout } from "lucide-react";
+import { ArrowLeft,Code2,Clapperboard,Users,TrendingUp,
+  Rocket,
+  Search } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -22,17 +24,17 @@ interface DomainDetailProps {
     };
 }
 
-const iconMap: Record<string, typeof MessageSquare> = {
-    MessageSquare,
-    Share2,
-    BarChart3,
-    Code2,
-    Cpu,
-    Layout
+const iconMap: Record<string, typeof Clapperboard> = {
+  Clapperboard,
+  Users,
+  TrendingUp,
+  Code2,
+  Rocket,
+  Search
 };
 
 export default function DomainDetail({ domain }: DomainDetailProps) {
-    const IconComponent = iconMap[domain.iconName] || MessageSquare;
+    const IconComponent = iconMap[domain.iconName] || Clapperboard;
 
     return (
         <section className="relative min-h-screen pt-32 pb-32 px-6 overflow-hidden">

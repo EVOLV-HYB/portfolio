@@ -7,24 +7,40 @@ import emailjs from "@emailjs/browser";
 
 const steps = [
     {
-        title: "The Problem Space",
-        description: "What is the primary friction point in your operations?",
+        title: "The Challenge",
+        description: "What area of your business needs the most improvement right now?",
         icon: Target,
-        fields: ["Growth Stagnation", "Operational Inefficiency", "Technical Debt", "Product Velocity"],
+        fields: [
+            "Getting more customers",
+            "Improving internal processes",
+            "Building or upgrading technology",
+            "Still defining the problem"
+        ],
     },
     {
-        title: "The Constraint",
-        description: "What have you tried that didn't work?",
-        icon: MessageSquare,
-        fields: ["Traditional Agencies", "In-house Band-aids", "Static Strategy Docs", "Nothing Yet"],
+        title: "The Current Situation",
+        description: "Where are you today with this initiative?",
+        icon: Lightbulb,
+        fields: [
+            "Just exploring ideas",
+            "Have a clear plan but need execution",
+            "Started but facing roadblocks",
+            "Already running, needs optimization"
+        ],
     },
     {
-        title: "The Objective",
-        description: "If we solve this, what is the #1 outcome?",
-        icon: ClipboardCheck,
-        fields: ["Scale Leverage", "Zero Manual Overhead", "Total Market Authority", "Sustainable Speed"],
+        title: "The Success Outcome",
+        description: "What would success look like for you?",
+        icon: TrendingUp,
+        fields: [
+            "Faster growth",
+            "Lower operational effort",
+            "Better customer experience",
+            "A scalable long-term system"
+        ],
     }
 ];
+
 
 export default function IntakeForm() {
     const [currentStep, setCurrentStep] = useState(0);

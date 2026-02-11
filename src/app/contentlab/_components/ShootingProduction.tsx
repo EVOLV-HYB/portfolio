@@ -7,25 +7,25 @@ import { Camera, Zap, Sun, Aperture, Plane, Wallet, Lightbulb } from "lucide-rea
 const cameraItems = [
     {
         id: 1,
-        name: "Cinema Line",
-        image: "/content/camera_gear.png", // Use available asset
-        desc: "8.6K RAW production for high-end commercials.",
+        name: "SONY ALPHA MARK IV",
+        image: "/sony-alpha-7r-4k-background-download-wallpaper-thumb.jpg", // Use available asset
+        desc: "33MP full-frame hybrid camera delivering ultra-sharp photography and cinematic 4K video with advanced AI autofocus and stabilization.",
         icon: Camera,
         color: "from-blue-600 to-cyan-500"
     },
     {
         id: 2,
-        name: "High Speed",
-        image: "/content/camera_gear.png",
-        desc: "120 FPS slow motion for dynamic storytelling.",
+        name: "IPHONE 16 PRO MAX",
+        image: "/Apple-iPhone-16-Pro-hero-240909-lp.jpg.news_app_ed.jpg",
+        desc: "Professional-grade triple-lens system with enhanced low-light performance and advanced computational photography for stunning photos and smooth cinematic video.",
         icon: Aperture,
         color: "from-purple-600 to-blue-500"
     },
     {
         id: 3,
-        name: "Low Light",
-        image: "/content/lighting_setup.png",
-        desc: "Superior night shots with dual ISO architecture.",
+        name: "IPHONE 14 PRO MAX",
+        image: "/iPhone-14-Pro-Max-Review_02.jpg",
+        desc: "Pro camera system with 48MP main sensor and versatile lenses delivering high-detail images and strong performance across photo and video.",
         icon: Sun,
         color: "from-blue-700 to-indigo-600"
     }
@@ -110,33 +110,34 @@ export default function ShootingProduction() {
                                         animate={{ rotateY: hoveredCircle === index ? 180 : 0 }}
                                     >
                                         {/* Front: Icon Side - Plain Blue for all */}
-                                        <div className="absolute inset-0 backface-hidden rounded-full border-2 border-blue-400/30 flex flex-col items-center justify-center p-8 bg-blue-600 overflow-hidden shadow-[0_0_50px_-12px_rgba(37,99,235,0.4)]">
-                                            <camera.icon className="w-12 h-12 text-white mb-4 relative z-10" />
-                                            <span className="text-white font-black text-center uppercase tracking-widest text-[10px] relative z-10">
-                                                {camera.name}
+                                        <div className="absolute inset-0 backface-hidden rounded-full border-2 border-blue-400/30 flex flex-col items-center justify-center overflow-hidden shadow-[0_0_50px_-12px_rgba(37,99,235,0.4)]">
+                                            {/* Camera Image Background */}
+                                            <img
+                                                src={camera.image}
+                                                alt={camera.name}
+                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/circle:scale-110"
+                                            />
+
+                                            {/* Gradient Overlay for Text Readability */}
+                                            <div className="absolute inset-0 bg-black/40 group-hover/circle:bg-black/20 transition-colors duration-500 z-10" />
+
+                                            {/* Large White Name Overlay */}
+                                            <span className="text-white font-black text-center uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] relative z-20 px-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
+                                                {camera.name.split(' ').map((word, i) => (
+                                                    <span key={i} className="block">{word}</span>
+                                                ))}
                                             </span>
                                         </div>
 
                                         {/* Back: Details Side */}
-                                        <div className="absolute inset-0 backface-hidden rounded-full bg-zinc-900 border-2 border-blue-500/50 flex flex-col items-center justify-center p-6 text-center transform rotateY-180 shadow-[0_0_50px_-12px_rgba(37,99,235,0.6)]">
+                                        <div className="absolute inset-0 backface-hidden rounded-full bg-zinc-900 border-2 border-blue-500/50 flex flex-col items-center justify-center p-8 text-center transform rotateY-180 shadow-[0_0_50px_-12px_rgba(37,99,235,0.6)]">
                                             <div className="absolute inset-0 bg-blue-600/10" />
-                                            <h4 className="text-white font-black uppercase text-[10px] tracking-[0.2em] mb-2 relative z-10">Technical Specs</h4>
-                                            <p className="text-[10px] md:text-xs text-gray-300 font-medium leading-tight relative z-10">
+                                            <h4 className="text-blue-400 font-black uppercase text-xs tracking-[0.3em] mb-4 relative z-10">Technical Specs</h4>
+                                            <p className="text-sm md:text-base text-gray-200 font-light leading-relaxed relative z-10">
                                                 {camera.desc}
                                             </p>
-                                            <div className="mt-3 w-8 h-1 bg-blue-500 rounded-full" />
+                                            <div className="mt-6 w-12 h-1 bg-blue-500 rounded-full" />
                                         </div>
-                                    </motion.div>
-
-                                    {/* Sub-label visible when spread - Arranged Neately Below */}
-                                    <motion.div
-                                        animate={{ opacity: hoveredCircle === null ? 1 : 0 }}
-                                        className="absolute -bottom-12 left-0 right-0 text-center flex flex-col items-center"
-                                    >
-                                        <div className="w-1 h-1 bg-blue-500/50 rounded-full mb-2" />
-                                        <span className="text-[10px] font-black text-blue-400 tracking-[0.3em] uppercase">
-                                            {camera.name}
-                                        </span>
                                     </motion.div>
                                 </div>
                             </motion.div>

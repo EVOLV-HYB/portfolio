@@ -18,7 +18,7 @@ export default function Hero() {
                     transition={{ duration: 0.5 }}
                     className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-widest mb-8"
                 >
-                    <Zap className="w-3 h-3" /> Systemic Problem Solving
+                    <Zap className="w-3 h-3" /> EVOLV HYBRID AGENCY
                 </motion.div>
 
                 <motion.h1
@@ -27,8 +27,8 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.9]"
                 >
-                    FROM <span className="text-accent underline decoration-4 underline-offset-8">ROOT</span><br />
-                    TO <span className="text-glow">RESULT</span>.
+                    CREATE  <span className="text-accent underline decoration-4 underline-offset-8">CONNECT</span><br />
+                    AND <span className="text-glow">CONVERT</span>.
                 </motion.h1>
 
                 <motion.p
@@ -37,7 +37,8 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
                 >
-                    We don&apos;t sell services. We solve operational friction and growth bottlenecks using a systematic, cross-domain approach that unites strategy, technology, and execution.
+                    EVOLV is a Hybrid innovation agency that combines strategy, creativity and technology to solve real world problems.
+                    We work as a growth partner- building systems, content and solutions that drive measurable results.
                 </motion.p>
 
                 <motion.div
@@ -47,11 +48,11 @@ export default function Hero() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <button className="group bg-accent text-accent-foreground px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 hover:bg-accent/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(37,99,235,0.4)]">
-                        Submit Your Problem
+                        Book the Slot
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                     <div className="text-sm text-muted-foreground font-medium">
-                        <span className="text-foreground">03</span> Spots Available for Q1
+                        <span className="text-foreground">3</span> Exclusive Questions
                     </div>
                 </motion.div>
             </div>

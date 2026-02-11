@@ -15,7 +15,7 @@ export default function Navigation() {
             >
                 <Link href="/" className="flex items-center gap-2 group">
                     <Hammer className="w-5 h-5 text-accent transition-transform group-hover:rotate-12" />
-                    <span className="font-bold tracking-tight text-lg">HY</span>
+                    <span className="font-bold tracking-tight text-lg">EVOLV</span>
                 </Link>
 
                 <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
@@ -28,7 +28,7 @@ export default function Navigation() {
                     href="/#intake"
                     className="bg-accent text-accent-foreground px-4 py-1.5 rounded-full text-sm font-bold hover:bg-accent/90 transition-all hover:scale-105 active:scale-95"
                 >
-                    Submit Problem
+                    Contact
                 </Link>
             </motion.div>
         </nav>
