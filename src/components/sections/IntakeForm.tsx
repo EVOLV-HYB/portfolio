@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, ClipboardCheck, MessageSquare, Target, Loader2, AlertCircle } from "lucide-react";
+import { CheckCircle2, ClipboardCheck, MessageSquare, Target, Loader2, AlertCircle, Lightbulb, TrendingUp } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 const steps = [
