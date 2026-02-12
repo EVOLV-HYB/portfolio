@@ -65,13 +65,15 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-            <button className="bg-accent text-accent-foreground px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 hover:bg-accent/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(37,99,235,0.4)]">
-              Explore Our Capabilities
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-accent text-accent-foreground px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 hover:bg-accent/90 transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] cursor-pointer"
+            >
+              Let's Grow Together
               <ArrowRight className="w-5 h-5" />
-            </button>
-            <button className="px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 border border-white/10 hover:bg-white/5 transition-all text-muted-foreground hover:text-foreground">
-              View Social Work
-            </button>
+            </motion.a>
           </div>
         </div>
 

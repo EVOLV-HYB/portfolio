@@ -116,8 +116,8 @@ export default function AboutUs() {
 
                             <div className="absolute inset-4 rounded-2xl border border-white/10 flex items-center justify-center">
                                 <div className="text-center group-hover:scale-110 transition-transform">
-                                    <span className="text-7xl font-bold text-accent drop-shadow-[0_0_15px_#007BFF]">500+</span>
-                                    <p className="text-white/40 uppercase tracking-widest mt-2">Ideas Built</p>
+                                    <span className="text-7xl font-bold text-accent drop-shadow-[0_0_15px_#007BFF]">3+</span>
+                                    <p className="text-white/40 uppercase tracking-widest mt-2">Ideas Building</p>
                                 </div>
                             </div>
 

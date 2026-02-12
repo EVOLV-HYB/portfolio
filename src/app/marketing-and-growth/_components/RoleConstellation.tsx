@@ -14,9 +14,9 @@ interface Role {
 
 const roles: Role[] = [
     {
-        id: 'arch',
-        label: 'Systems Engineers',
-        value: 'Arch',
+        id: 'Design',
+        label: 'Systems Designerss',
+        value: 'Plan',
         description: 'Building robust system architectures',
         position: { x: 20, y: 30 },
         connections: ['code', 'scale'],

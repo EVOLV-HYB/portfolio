@@ -9,19 +9,19 @@ const Footer = () => {
 
     const sections = {
         services: [
-            { name: "Content Creation", href: "/contentlab" },
-            { name: "Social Media Management", href: "/social-media" },
-            { name: "Digital Marketing", href: "/marketing" },
+            { name: "Content Creation", href: "/content-and-creative-lab" },
+            { name: "Social Media Management", href: "/social-media-and-management" },
+            { name: "Digital Marketing", href: "/marketing-and-growth" },
             { name: "Web & App Development", href: "/techlab" },
-            { name: "Product Building", href: "/product" },
-            { name: "Consulting", href: "/consultancy" },
+            { name: "Product Building", href: "/venture-forge" },
+            { name: "Consulting", href: "/consultancy-and-problem-analysis" },
         ],
         quickLinks: [
             { name: "Home", href: "/" },
             { name: "About", href: "#about" },
             { name: "Services", href: "#services" },
             { name: "Portfolio", href: "#work" },
-            { name: "Contact", href: "#intake" },
+            { name: "Contact", href: "/#intake" },
         ],
         socials: [
             { icon: Instagram, href: "#", label: "Instagram" },
@@ -87,13 +87,13 @@ const Footer = () => {
                     <div className="space-y-6">
                         <h4 className="text-foreground font-semibold mb-4">Contact</h4>
                         <div className="space-y-4">
-                            <a href="mailto:hello@evolv.xyz" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors group">
+                            <a href="mailto:evolvhybagency@gmail.com" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors group">
                                 <Mail className="w-4 h-4" />
-                                hello@evolv.xyz
+                                evolvhybagency@gmail.com
                             </a>
-                            <a href="tel:+910000000000" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors">
+                            <a href="tel:+919342821755" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors">
                                 <Phone className="w-4 h-4" />
-                                +91 (WhatsApp)
+                                +91 9342821755
                             </a>
                             <div className="flex items-center gap-3 text-sm text-muted-foreground">
                                 <MapPin className="w-4 h-4" />
@@ -102,7 +102,7 @@ const Footer = () => {
                         </div>
 
                         <Link
-                            href="#intake"
+                            href="/#intake"
                             className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-xl text-sm font-bold hover:bg-accent/90 transition-all hover:scale-105 active:scale-95 group"
                         >
                             Start a Project

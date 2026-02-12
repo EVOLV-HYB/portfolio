@@ -18,14 +18,14 @@ export function VerticalJourneyLine({ steps }: VerticalJourneyLineProps) {
     const [hoveredStep, setHoveredStep] = useState<number | null>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
 
-    // Scroll-based animation for progressive reveal
+    // Scroll-based animation for progressive reveal - start earlier
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start 0.7", "end 0.3"]
+        offset: ["start 0.9", "end 0.1"]
     });
 
-    // Map scroll progress to spine drawing (0 to 1)
-    const spineProgress = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
+    // Map scroll progress to spine drawing (reaches end faster)
+    const spineProgress = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
 
     return (
         <div ref={containerRef} className="relative w-full py-20">
@@ -57,12 +57,12 @@ export function VerticalJourneyLine({ steps }: VerticalJourneyLineProps) {
                         {steps.map((step, index) => {
                             const isHovered = hoveredStep === step.stepNumber;
 
-                            // Sequential fade-in based on scroll progress
-                            const nodeDelay = index * 0.12;
+                            // Sequential fade-in based on scroll progress - accelerated
+                            const nodeDelay = index * 0.08;
                             const nodeOpacity = useTransform(
                                 scrollYProgress,
-                                [nodeDelay, nodeDelay + 0.2],
-                                [0, 1]
+                                [nodeDelay, nodeDelay + 0.15],
+                                [0.2, 1] // Start at 0.2 so they are at least faintly visible
                             );
 
                             return (

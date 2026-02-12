@@ -12,7 +12,7 @@ const steps = [
     { id: 4, title: "Investment", icon: Rocket, desc: "Secure the capital needed to scale your vision globally." },
 ];
 
-function CubeStep({ step, isActive, onClick, index }: { step: typeof steps[0]; isActive: boolean; onClick: () => void; index: number }) {
+function CubeStep({ step, isActive, onHover, index }: { step: typeof steps[0]; isActive: boolean; onHover: () => void; index: number }) {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
     const mouseXSpring = useSpring(x);
@@ -28,7 +28,7 @@ function CubeStep({ step, isActive, onClick, index }: { step: typeof steps[0]; i
 
     return (
         <motion.div
-            onClick={onClick}
+            onMouseEnter={onHover}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => { x.set(0); y.set(0); }}
             className={`relative cursor-pointer transition-all duration-700 ${isActive ? "scale-110 z-20" : "scale-90 opacity-50 z-10"}`}
@@ -121,7 +121,7 @@ export default function HowItWorks() {
                             step={step}
                             index={i}
                             isActive={activeStep === i}
-                            onClick={() => setActiveStep(i)}
+                            onHover={() => setActiveStep(i)}
                         />
                     ))}
                 </div>

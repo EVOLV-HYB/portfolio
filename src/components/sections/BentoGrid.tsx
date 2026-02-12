@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { domains } from "@/lib/domains";
 
@@ -22,12 +23,12 @@ export default function BentoGrid() {
                     {domains.map((domain, index) => {
                         const getLink = (title: string) => {
                             switch (title) {
-                                case "Content and Creative Lab": return "/contentlab";
-                                case "Social Media and Community Management": return "/social-media";
+                                case "Content and Creative Lab": return "/content-and-creative-lab";
+                                case "Social Media and Community Management": return "/social-media-and-management";
                                 case "Tech Lab": return "/techlab";
-                                case "Consulting and Problem Analysis": return "/consultancy";
-                                case "Venture Forge": return "/product";
-                                case "Marketing and Growth": return "/marketing";
+                                case "Consulting and Problem Analysis": return "/consultancy-and-problem-analysis";
+                                case "Venture Forge": return "/venture-forge";
+                                case "Marketing and Growth": return "/marketing-and-growth";
                                 default: return null;
                             }
                         };
@@ -52,8 +53,13 @@ export default function BentoGrid() {
                                 )} />
 
                                 <div className="relative z-10">
-                                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                        <domain.icon className="w-6 h-6 text-accent" />
+                                    <div className="w-full aspect-video rounded-2xl overflow-hidden mb-6 group-hover:scale-105 transition-transform border border-white/5 relative">
+                                        <Image
+                                            src={domain.image}
+                                            alt={domain.title}
+                                            fill
+                                            className="object-cover"
+                                        />
                                     </div>
 
                                     <h3 className="text-2xl font-black mb-4 uppercase tracking-tight">{domain.title}</h3>

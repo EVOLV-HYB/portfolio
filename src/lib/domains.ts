@@ -16,6 +16,7 @@ export interface Domain {
     iconName: string; // Add icon name for client component
     className: string;
     color: string;
+    image: string; // Add image path
     // Extended content for detail page
     content?: {
         overview?: string;
@@ -34,6 +35,7 @@ export const domains: Domain[] = [
         iconName: "MessageSquare",
         className: "md:col-span-2",
         color: "from-blue-500/10 to-transparent",
+        image: "/Content and creative lab.png",
         content: {
             overview: "",
             services: [],
@@ -49,6 +51,7 @@ export const domains: Domain[] = [
         iconName: "Share2",
         className: "md:col-span-1",
         color: "from-blue-600/10 to-transparent",
+        image: "/Social Media Management.png",
         content: {
             overview: "",
             services: [],
@@ -64,6 +67,7 @@ export const domains: Domain[] = [
         iconName: "BarChart3",
         className: "md:col-span-1",
         color: "from-blue-700/10 to-transparent",
+        image: "/Marketing and growth.png",
         content: {
             overview: "",
             services: [],
@@ -79,6 +83,7 @@ export const domains: Domain[] = [
         iconName: "Code2",
         className: "md:col-span-2",
         color: "from-blue-400/10 to-transparent",
+        image: "/TECHLAB_20260210_174330_0000.png",
         content: {
             overview: "",
             services: [],
@@ -94,6 +99,7 @@ export const domains: Domain[] = [
         iconName: "Cpu",
         className: "md:col-span-1",
         color: "from-blue-800/10 to-transparent",
+        image: "/Venture Forge.png",
         content: {
             overview: "",
             services: [],
@@ -109,6 +115,7 @@ export const domains: Domain[] = [
         iconName: "Layout",
         className: "md:col-span-2",
         color: "from-blue-900/10 to-transparent",
+        image: "/Consultancy and problem analysis.png",
         content: {
             overview: "",
             services: [],

@@ -4,10 +4,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useVelocity } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { VerticalJourneyLine } from "@/app/marketing/_components/VerticalJourneyLine";
-import { PhilosophyGlow } from "@/app/marketing/_components/PhilosophyGlow";
-import { MarketingGallery } from "@/app/marketing/_components/MarketingGallery";
-import { RoleConstellation } from "@/app/marketing/_components/RoleConstellation";
+import { VerticalJourneyLine } from "@/app/marketing-and-growth/_components/VerticalJourneyLine";
+import { PhilosophyGlow } from "@/app/marketing-and-growth/_components/PhilosophyGlow";
+import { MarketingGallery } from "@/app/marketing-and-growth/_components/MarketingGallery";
+import { RoleConstellation } from "@/app/marketing-and-growth/_components/RoleConstellation";
 import ContentCTA from "@/components/shared/ContentCTA";
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -409,16 +409,16 @@ export default function MarketingPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-center max-w-4xl px-6"
         >
-          <div className="text-accent text-sm font-bold tracking-widest mb-6">HYBRID INNOVATION AGENCY</div>
+          <div className="text-accent text-sm font-bold tracking-widest mb-6">EVOLV INNOVATION AGENCY</div>
           <TypewriterTitle />
           <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             We don't sell services. We solve operational friction and growth bottlenecks using a systematic, cross-domain approach that unites strategy, technology, and execution.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href="#how-we-work">
-              <Button glow spark>Explore How We Work</Button>
+            <Link href="#contact">
+              <Button glow spark>Grow with us</Button>
             </Link>
-            <Link href="#growth">
+            <Link href="#how-we-work">
               <Button variant="secondary">View Our Strategies</Button>
             </Link>
           </div>
@@ -460,7 +460,7 @@ export default function MarketingPage() {
       </section>
 
       {/* Core Philosophy */}
-      <section className="py-20 px-6 bg-muted/20">
+      <section className="py-10 px-6 bg-muted/20">
         <motion.div
           initial="initial"
           whileInView="animate"
@@ -484,7 +484,7 @@ export default function MarketingPage() {
       </section>
 
       {/* How We Work */}
-      <section id="how-we-work" className="py-20 px-6">
+      <section id="how-we-work" className="py-10 px-6">
         <motion.div
           initial="initial"
           whileInView="animate"
@@ -568,7 +568,7 @@ export default function MarketingPage() {
       </section>
 
       {/* Team & Culture */}
-      <section className="py-20 px-6 bg-muted/20">
+      <section className="py-10 px-6 bg-muted/20">
         <motion.div
           initial="initial"
           whileInView="animate"
@@ -583,14 +583,6 @@ export default function MarketingPage() {
           <div className="w-full h-px bg-linear-to-r from-transparent via-white/10 to-transparent mb-12 animate-pulse" />
 
           <RoleConstellation />
-
-          <motion.p {...fadeInUp} className="text-muted-foreground mb-12 max-w-2xl mx-auto mt-16">
-            Strong developer team. Creative content team. Execution-first mindset. Still expanding the team.
-          </motion.p>
-          <motion.div {...fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button>Work With Us</Button>
-            <Button variant="secondary">Join the Team</Button>
-          </motion.div>
         </motion.div>
       </section>
 
@@ -643,10 +635,10 @@ export default function MarketingPage() {
       </section>
 
       {/* Final CTA */}
-      
-        <ContentCTA />
-   
-    
+
+      <ContentCTA />
+
+
     </div>
   );
 }
