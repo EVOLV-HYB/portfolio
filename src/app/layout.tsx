@@ -9,8 +9,11 @@ import Footer from "../components/shared/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Hy - Root to Result",
+  title: "EVOLV HYB",
   description: "Hybrid Problem-Solving & Innovation Agency. Strategy, Technology, and Execution under one system.",
+  icons: {
+    icon: "/Screenshot_20260210_173501.jpg",
+  },
 };
 
 export default function RootLayout({
