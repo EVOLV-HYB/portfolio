@@ -4,10 +4,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useVelocity } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { VerticalJourneyLine } from "@/app/marketing/_components/VerticalJourneyLine";
-import { PhilosophyGlow } from "@/app/marketing/_components/PhilosophyGlow";
-import { MarketingGallery } from "@/app/marketing/_components/MarketingGallery";
-import { RoleConstellation } from "@/app/marketing/_components/RoleConstellation";
+import { VerticalJourneyLine } from "@/app/marketing-and-growth/_components/VerticalJourneyLine";
+import { PhilosophyGlow } from "@/app/marketing-and-growth/_components/PhilosophyGlow";
+import { MarketingGallery } from "@/app/marketing-and-growth/_components/MarketingGallery";
+import { RoleConstellation } from "@/app/marketing-and-growth/_components/RoleConstellation";
 import ContentCTA from "@/components/shared/ContentCTA";
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },

@@ -9,12 +9,12 @@ const Footer = () => {
 
     const sections = {
         services: [
-            { name: "Content Creation", href: "/contentlab" },
-            { name: "Social Media Management", href: "/social-media" },
-            { name: "Digital Marketing", href: "/marketing" },
+            { name: "Content Creation", href: "/content-and-creative-lab" },
+            { name: "Social Media Management", href: "/social-media-and-management" },
+            { name: "Digital Marketing", href: "/marketing-and-growth" },
             { name: "Web & App Development", href: "/techlab" },
-            { name: "Product Building", href: "/product" },
-            { name: "Consulting", href: "/consultancy" },
+            { name: "Product Building", href: "/venture-forge" },
+            { name: "Consulting", href: "/consultancy-and-problem-analysis" },
         ],
         quickLinks: [
             { name: "Home", href: "/" },

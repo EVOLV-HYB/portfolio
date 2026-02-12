@@ -23,12 +23,12 @@ export default function BentoGrid() {
                     {domains.map((domain, index) => {
                         const getLink = (title: string) => {
                             switch (title) {
-                                case "Content and Creative Lab": return "/contentlab";
-                                case "Social Media and Community Management": return "/social-media";
+                                case "Content and Creative Lab": return "/content-and-creative-lab";
+                                case "Social Media and Community Management": return "/social-media-and-management";
                                 case "Tech Lab": return "/techlab";
-                                case "Consulting and Problem Analysis": return "/consultancy";
-                                case "Venture Forge": return "/product";
-                                case "Marketing and Growth": return "/marketing";
+                                case "Consulting and Problem Analysis": return "/consultancy-and-problem-analysis";
+                                case "Venture Forge": return "/venture-forge";
+                                case "Marketing and Growth": return "/marketing-and-growth";
                                 default: return null;
                             }
                         };
