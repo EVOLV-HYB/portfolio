@@ -97,7 +97,6 @@ const services = [
     { icon: Rocket, title: "Digital Transformation", description: "Modernizing legacy businesses for the digital-first economy." },
     { icon: Target, title: "Go-to-Market Strategy", description: "Launching new products with precision and maximum impact." },
     { icon: Lightbulb, title: "Product Validation", description: "Testing and refining ideas before investing in full-scale build." },
-    { icon: CheckCircle2, title: "System Integration", description: "Connecting disparate tools into a unified, automated ecosystem." }
 ];
 
 const idealClients = [
@@ -170,7 +169,7 @@ function HeroSection() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-6"
                 >
                     <a
-                        href="#intake"
+                        href="#contact"
                         className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(37,99,235,0.4)]"
                     >
                         Schedule a Consultation
@@ -224,9 +223,9 @@ function FrameworkSection() {
     return (
         <section className="py-32 px-6 border-t border-white/5 bg-background">
             <div className="container mx-auto max-w-6xl">
-                <div className="flex flex-col md:flex-row gap-16 items-start">
+                <div className="flex flex-col lg:flex-row gap-8 items-stretch">
                     {/* Left: Interactive List */}
-                    <div className="flex-1 space-y-8 sticky top-24">
+                    <div className="w-full lg:w-[350px] space-y-6">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -240,20 +239,20 @@ function FrameworkSection() {
                             </p>
                         </motion.div>
 
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                             {frameworkSteps.map((step) => (
                                 <div
                                     key={step.id}
-                                    onClick={() => setActiveStep(step.id)}
+                                    onMouseEnter={() => setActiveStep(step.id)}
                                     className={cn(
-                                        "group cursor-pointer p-5 rounded-xl border transition-all duration-300 relative overflow-hidden",
+                                        "group cursor-pointer p-4 rounded-xl border transition-all duration-300 relative overflow-hidden",
                                         activeStep === step.id
                                             ? "bg-accent/5 border-accent/20"
                                             : "bg-card border-white/5 hover:border-white/10"
                                     )}
                                 >
                                     <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${activeStep === step.id ? "bg-accent" : "bg-transparent"}`} />
-                                    <div className="flex items-center gap-4">
+                                    <div className="flex items-center gap-3">
                                         <div className={`p-2 rounded-lg transition-colors ${activeStep === step.id ? "bg-accent/10 text-accent" : "bg-white/5 text-muted-foreground"}`}>
                                             <step.icon className="w-5 h-5" />
                                         </div>
@@ -266,77 +265,104 @@ function FrameworkSection() {
                                             </h3>
                                         </div>
                                     </div>
-                                    <AnimatePresence>
-                                        {activeStep === step.id && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                className="overflow-hidden pl-[60px]"
-                                            >
-                                                <p className="pt-2 text-sm text-muted-foreground leading-relaxed pb-2">
-                                                    {step.description}
-                                                </p>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Right: Visual Display */}
-                    <div className="flex-1 w-full aspect-square md:aspect-auto md:min-h-[600px] relative perspective-1000">
-                        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent rounded-3xl blur-2xl" />
-                        <div className="relative w-full h-full bg-card/50 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden flex items-center justify-center p-12">
-                            <div className="absolute inset-0 grid-pattern opacity-20" />
-                            <AnimatePresence mode="wait">
+                    {/* Right: Visual Display (5 Expanding Cards) */}
+                    <div className="flex-1 flex flex-col gap-3 min-h-[500px]">
+                        {frameworkSteps.map((step) => {
+                            const isActive = activeStep === step.id;
+                            const Icon = step.icon;
+                            return (
                                 <motion.div
-                                    key={activeStep}
-                                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                                    transition={{ duration: 0.4 }}
-                                    className="relative z-10 text-center"
+                                    key={step.id}
+                                    layout
+                                    initial={false}
+                                    animate={{
+                                        flex: isActive ? 3 : 1,
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 300,
+                                        damping: 30
+                                    }}
+                                    className={cn(
+                                        "relative rounded-xl border overflow-hidden group/card transition-colors duration-500",
+                                        isActive
+                                            ? "bg-card border-accent/30 shadow-[0_0_50px_rgba(37,99,235,0.1)]"
+                                            : "bg-card/40 border-white/5 hover:border-white/10"
+                                    )}
+                                    onMouseEnter={() => setActiveStep(step.id)}
                                 >
-                                    <div className={`w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-tr ${frameworkSteps[activeStep].color} flex items-center justify-center shadow-[0_0_50px_rgba(0,0,0,0.5)]`}>
-                                        {(() => {
-                                            const Icon = frameworkSteps[activeStep].icon;
-                                            return <Icon className="w-12 h-12 text-white" />;
-                                        })()}
-                                    </div>
-                                    <div className={`text-sm font-bold tracking-widest uppercase mb-2 ${frameworkSteps[activeStep].accent}`}>Step {activeStep + 1}</div>
-                                    <h3 className="text-3xl font-black uppercase tracking-tight mb-4">
-                                        {frameworkSteps[activeStep].subtitle}
-                                    </h3>
-                                    <div className="h-1 w-24 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto" />
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
+                                    {/* Background Accent */}
+                                    <div className={cn(
+                                        "absolute inset-0 opacity-0 transition-opacity duration-500 bg-gradient-to-br",
+                                        step.color,
+                                        isActive && "opacity-100"
+                                    )} />
+                                    <div className="absolute inset-0 grid-pattern opacity-10" />
 
-// 4. WHAT MAKES US DIFFERENT
-function DifferentiatorsSection() {
-    return (
-        <section className="py-32 px-6 relative overflow-hidden bg-muted/20">
-            <div className="container mx-auto max-w-6xl">
-                <div className="mb-20">
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight uppercase">
-                        Not Just Advisory. <br /><span className="text-accent">Strategic Partners.</span>
-                    </h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {differentiators.map((diff, idx) => (
-                        <div key={idx} className="p-8 rounded-2xl bg-card border border-white/5 hover:border-accent/30 transition-all duration-300">
-                            <h3 className="text-xl font-bold mb-3 text-white uppercase tracking-tight">{diff.title}</h3>
-                            <p className="text-muted-foreground leading-relaxed">{diff.description}</p>
-                        </div>
-                    ))}
+                                    <div className="relative h-full flex items-center p-6 gap-6">
+                                        {/* Icon Section */}
+                                        <motion.div
+                                            layout
+                                            className={cn(
+                                                "shrink-0 w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500",
+                                                isActive ? "bg-accent text-white scale-110 shadow-lg" : "bg-white/5 text-muted-foreground"
+                                            )}
+                                        >
+                                            <Icon className={cn("transition-all duration-500", isActive ? "w-7 h-7" : "w-6 h-6")} />
+                                        </motion.div>
+
+                                        {/* Content Section */}
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center gap-4 mb-1">
+                                                <span className={cn(
+                                                    "text-xs font-bold tracking-widest uppercase transition-colors duration-500",
+                                                    isActive ? "text-white/70" : "text-muted-foreground/50"
+                                                )}>
+                                                    Step 0{step.id + 1}
+                                                </span>
+                                                <h3 className={cn(
+                                                    "text-xl font-bold uppercase tracking-tight transition-colors duration-500",
+                                                    isActive ? "text-white" : "text-muted-foreground"
+                                                )}>
+                                                    {step.title}
+                                                </h3>
+                                            </div>
+
+                                            <AnimatePresence mode="wait">
+                                                {isActive && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, x: 20 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        exit={{ opacity: 0, x: -20 }}
+                                                        transition={{ duration: 0.3, delay: 0.1 }}
+                                                    >
+                                                        <h4 className="text-2xl font-black text-white mb-2 uppercase tracking-tight">
+                                                            {step.subtitle}
+                                                        </h4>
+                                                        <p className="text-white/80 max-w-xl leading-relaxed">
+                                                            {step.description}
+                                                        </p>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+
+                                        {/* Decorative Element for non-active */}
+                                        {!isActive && (
+                                            <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                                                <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                                            </div>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </section>
@@ -382,16 +408,36 @@ function ServicesSection() {
 // 6. WHO WE WORK BEST WITH
 function IdealClientsSection() {
     return (
-        <section className="py-32 px-6 bg-muted/30">
-            <div className="container mx-auto max-w-4xl text-center">
-                <h2 className="text-3xl md:text-5xl font-black mb-12 tracking-tight uppercase">Who We Work Best With</h2>
-                <div className="grid gap-4">
-                    {idealClients.map((client, idx) => (
-                        <div key={idx} className="p-6 rounded-xl border border-white/10 bg-card flex items-center justify-center hover:border-accent/30 transition-all">
-                            <span className="text-lg md:text-xl font-medium text-white">{client}</span>
+        <section className="py-20 px-6 bg-muted/30 overflow-hidden">
+            <div className="container mx-auto text-center mb-10">
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight uppercase">Who We Work Best With</h2>
+            </div>
+
+            <div className="relative flex items-center">
+                <motion.div
+                    animate={{
+                        x: ["-50%", "0%"],
+                    }}
+                    transition={{
+                        x: {
+                            repeat: Infinity,
+                            repeatType: "loop",
+                            duration: 40,
+                            ease: "linear",
+                        },
+                    }}
+                    className="flex gap-6 whitespace-nowrap"
+                >
+                    {/* Quadruple the list to ensure it covers the screen and loops smoothly */}
+                    {[...idealClients, ...idealClients, ...idealClients, ...idealClients].map((client, idx) => (
+                        <div
+                            key={idx}
+                            className="flex-shrink-0 px-10 py-6 rounded-2xl border border-white/10 bg-card flex items-center justify-center hover:border-accent/40 hover:bg-accent/5 transition-all duration-300 group min-w-[400px]"
+                        >
+                            <span className="text-xl md:text-2xl font-bold text-white/70 group-hover:text-accent transition-colors uppercase tracking-widest">{client}</span>
                         </div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
@@ -437,7 +483,7 @@ function FinalSection() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                     <a
-                        href="#intake"
+                        href="#contact"
                         className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(37,99,235,0.4)]"
                     >
                         Book a Strategic Consultation
@@ -470,7 +516,7 @@ function DirectContactSection() {
                         <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-300">
                             <Phone className="w-6 h-6" />
                         </div>
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">+1 (555) 123-4567</span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">+91 93428 21755</span>
                     </a>
                 </div>
             </div>
@@ -480,12 +526,11 @@ function DirectContactSection() {
 
 export default function ConsultancyPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
-        
+        <div className="flex flex-col min-h-screen bg-background text-foreground">
+
             <HeroSection />
             <PainPointsSection />
             <FrameworkSection />
-            <DifferentiatorsSection />
             <ServicesSection />
             <IdealClientsSection />
             <EngagementSection />

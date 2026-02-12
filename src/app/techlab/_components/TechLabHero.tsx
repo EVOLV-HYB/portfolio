@@ -190,7 +190,7 @@ export default function TechLabHero() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <Link
-                        href="#capabilities"
+                        href="#contact"
                         className="group relative bg-accent text-accent-foreground px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 overflow-hidden transition-all hover:scale-105 active:scale-95"
                     >
                         <motion.div
@@ -199,17 +199,17 @@ export default function TechLabHero() {
                             whileHover={{ x: "100%" }}
                             transition={{ duration: 0.6 }}
                         />
-                        <span className="relative z-10">Explore Our Capabilities</span>
+                        <span className="relative z-10">Build with us</span>
                         <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                         <div className="absolute inset-0 shadow-[0_0_30px_rgba(37,99,235,0.6)] opacity-0 group-hover:opacity-100 transition-opacity" />
                     </Link>
 
                     <Link
-                        href="#case-studies"
+                        href="#methodology"
                         className="group relative bg-card/50 backdrop-blur-sm border border-white/10 text-foreground px-8 py-4 rounded-xl text-lg font-bold flex items-center gap-2 hover:border-accent/50 transition-all hover:scale-105 active:scale-95"
                     >
                         <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        View Platform Case Studies
+                        View Our Methodology
                     </Link>
                 </motion.div>
             </motion.div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Camera, Zap, Sun, Aperture, Plane, Wallet, Lightbulb } from "lucide-react";
 
@@ -32,7 +32,7 @@ const cameraItems = [
 ];
 
 export default function ShootingProduction() {
-    const sectionRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
     const [hoveredCircle, setHoveredCircle] = useState<number | null>(null);
 
     const { scrollYProgress } = useScroll({
@@ -40,21 +40,22 @@ export default function ShootingProduction() {
         offset: ["start end", "end start"]
     });
 
-    // Transform values for the scroll animation
-    const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-    const headerY = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
-
     // Circles start at bottom center and spread out
-    const circleY = useTransform(scrollYProgress, [0.1, 0.4, 0.7], ["60%", "0%", "-10%"]);
-    const circleScale = useTransform(scrollYProgress, [0.1, 0.3], [0.5, 1]);
+    const circleY = useTransform(scrollYProgress, [0.05, 0.3, 0.7], ["60%", "0%", "-10%"]);
+    const rawScale = useTransform(scrollYProgress, [0.05, 0.2], [0.6, 1]);
+    const circleScale = useSpring(rawScale, { stiffness: 100, damping: 30, mass: 0.5 });
 
-    // Spread X positions
-    const spreadX1 = useTransform(scrollYProgress, [0.3, 0.45], ["0%", "-120%"]); // Left
-    const spreadX2 = useTransform(scrollYProgress, [0.3, 0.45], ["0%", "0%"]);    // Center
-    const spreadX3 = useTransform(scrollYProgress, [0.3, 0.45], ["0%", "120%"]);  // Right
+    // Spread X positions - Start spreading AFTER they arrived and scaled
+    const rawX1 = useTransform(scrollYProgress, [0.35, 0.5], ["0%", "-120%"]); // Left
+    const rawX2 = useTransform(scrollYProgress, [0.35, 0.5], ["0%", "0%"]);    // Center
+    const rawX3 = useTransform(scrollYProgress, [0.35, 0.5], ["0%", "120%"]);  // Right
 
-    // Spread Opacity
-    const circleOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 0]);
+    const spreadX1 = useSpring(rawX1, { stiffness: 100, damping: 30, mass: 0.5 });
+    const spreadX2 = useSpring(rawX2, { stiffness: 100, damping: 30, mass: 0.5 });
+    const spreadX3 = useSpring(rawX3, { stiffness: 100, damping: 30, mass: 0.5 });
+
+    // Spread Opacity - Reach full visibility earlier
+    const circleOpacity = useTransform(scrollYProgress, [0.05, 0.15, 0.75, 0.9], [0, 1, 1, 0]);
 
     return (
         <section ref={sectionRef} className="relative min-h-[100vh] bg-black overflow-hidden pt-16">
@@ -64,7 +65,9 @@ export default function ShootingProduction() {
 
             {/* 1. High-Impact Centered Header */}
             <motion.div
-                style={{ opacity: headerOpacity, y: headerY }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 className="container max-w-7xl mx-auto px-6 text-center mb-4 z-20 relative"
             >
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-[0.3em] mb-8">
@@ -73,11 +76,11 @@ export default function ShootingProduction() {
                 </div>
                 <h2 className="text-5xl md:text-8xl font-black text-white leading-[0.85] tracking-tighter uppercase mb-8">
                     Production & <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+                    <span className="text-blue-500">
                         Shooting.
                     </span>
                 </h2>
-                <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed">
+                <p className="text-gray-400 max-w-xl mx-auto text-lg font-light uppercase tracking-widest">
                     We combine cinematic vision with industry-leading technology to capture every detail with absolute precision.
                 </p>
             </motion.div>
@@ -110,19 +113,19 @@ export default function ShootingProduction() {
                                         animate={{ rotateY: hoveredCircle === index ? 180 : 0 }}
                                     >
                                         {/* Front: Icon Side - Plain Blue for all */}
-                                        <div className="absolute inset-0 backface-hidden rounded-full border-2 border-blue-400/30 flex flex-col items-center justify-center overflow-hidden shadow-[0_0_50px_-12px_rgba(37,99,235,0.4)]">
+                                        <div className="absolute inset-0 backface-hidden rounded-full border-2 border-blue-400/30 flex flex-col items-center justify-center overflow-hidden shadow-[0_0_50px_-12px_rgba(37,99,235,0.4)] bg-zinc-900">
                                             {/* Camera Image Background */}
                                             <img
                                                 src={camera.image}
                                                 alt={camera.name}
-                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/circle:scale-110"
+                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/circle:scale-110 opacity-70 group-hover/circle:opacity-90"
                                             />
 
-                                            {/* Gradient Overlay for Text Readability */}
-                                            <div className="absolute inset-0 bg-black/40 group-hover/circle:bg-black/20 transition-colors duration-500 z-10" />
+                                            {/* Subtle Radial Overlay for Text Readability */}
+                                            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 group-hover/circle:from-black/40 group-hover/circle:to-black/40 transition-colors duration-500 z-10" />
 
                                             {/* Large White Name Overlay */}
-                                            <span className="text-white font-black text-center uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] relative z-20 px-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
+                                            <span className="text-white font-black text-center uppercase tracking-tighter text-2xl md:text-4xl leading-[0.85] relative z-20 px-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
                                                 {camera.name.split(' ').map((word, i) => (
                                                     <span key={i} className="block">{word}</span>
                                                 ))}

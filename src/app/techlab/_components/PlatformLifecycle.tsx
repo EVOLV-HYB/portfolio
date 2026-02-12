@@ -49,7 +49,7 @@ export default function PlatformLifecycle() {
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     return (
-        <section ref={containerRef} className="py-32 px-6 bg-muted/30 relative overflow-hidden">
+        <section id="methodology" ref={containerRef} className="py-32 px-6 bg-muted/30 relative overflow-hidden">
             {/* Cinematic background parallax elements */}
             <motion.div
                 className="absolute inset-0 opacity-20 pointer-events-none will-change-transform"

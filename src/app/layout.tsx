@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
+import Image from "next/image";
+import LogoNav from "@/components/shared/LogoNav";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScroll";
 import Footer from "../components/shared/Footer";
@@ -21,6 +24,9 @@ export default function RootLayout({
         <SmoothScrollProvider>
           <div className="fixed inset-0 grid-pattern pointer-events-none opacity-50" />
           <div className="fixed inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-transparent pointer-events-none" />
+
+          <LogoNav />
+
           <main className="relative z-10">
             {children}
             <Footer />

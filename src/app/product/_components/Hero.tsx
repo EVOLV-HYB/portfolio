@@ -3,6 +3,7 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, Rocket, Globe } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 
 // Source references:
 // Framer Motion for text cascade and staggered reveals
@@ -197,18 +198,22 @@ export default function Hero() {
                     </motion.p>
 
                     <div className="flex flex-col sm:flex-row items-start gap-4">
-                        <ButtonExplosion
-                            className="px-10 py-5 bg-accent rounded-xl text-white font-bold flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,123,255,0.5)] transition-shadow hover:shadow-[0_0_40px_rgba(0,123,255,0.7)]"
-                        >
-                            Ignite Growth <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
-                        </ButtonExplosion>
+                        <Link href="#contact">
+                            <ButtonExplosion
+                                className="px-10 py-5 bg-accent rounded-xl text-white font-bold flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,123,255,0.5)] transition-shadow hover:shadow-[0_0_40px_rgba(0,123,255,0.7)]"
+                            >
+                                Ignite the Growth <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
+                            </ButtonExplosion>
+                        </Link>
 
-                        <motion.button
-                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }}
-                            className="px-10 py-5 border-2 border-white/5 text-white rounded-xl font-bold backdrop-blur-md transition-all flex items-center gap-2"
-                        >
-                            Explore Expo <Globe size={18} className="text-accent" />
-                        </motion.button>
+                        <Link href="#how">
+                            <motion.button
+                                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }}
+                                className="px-10 py-5 border-2 border-white/5 text-white rounded-xl font-bold backdrop-blur-md transition-all flex items-center gap-2"
+                            >
+                                Explore Forge path<Globe size={18} className="text-accent" />
+                            </motion.button>
+                        </Link>
                     </div>
                 </div>
 

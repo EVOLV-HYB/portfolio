@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { domains } from "@/lib/domains";
 
@@ -52,8 +53,13 @@ export default function BentoGrid() {
                                 )} />
 
                                 <div className="relative z-10">
-                                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                        <domain.icon className="w-6 h-6 text-accent" />
+                                    <div className="w-full aspect-video rounded-2xl overflow-hidden mb-6 group-hover:scale-105 transition-transform border border-white/5 relative">
+                                        <Image
+                                            src={domain.image}
+                                            alt={domain.title}
+                                            fill
+                                            className="object-cover"
+                                        />
                                     </div>
 
                                     <h3 className="text-2xl font-black mb-4 uppercase tracking-tight">{domain.title}</h3>

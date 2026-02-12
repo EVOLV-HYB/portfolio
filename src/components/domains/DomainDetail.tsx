@@ -1,10 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft,Code2,Clapperboard,Users,TrendingUp,
-  Rocket,
-  Search } from "lucide-react";
+import {
+    ArrowLeft, Code2, Clapperboard, Users, TrendingUp,
+    Rocket,
+    Search
+} from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface DomainDetailProps {
@@ -15,6 +18,7 @@ interface DomainDetailProps {
         iconName: string;
         className: string;
         color: string;
+        image: string;
         content?: {
             overview?: string;
             services?: string[];
@@ -25,12 +29,12 @@ interface DomainDetailProps {
 }
 
 const iconMap: Record<string, typeof Clapperboard> = {
-  Clapperboard,
-  Users,
-  TrendingUp,
-  Code2,
-  Rocket,
-  Search
+    Clapperboard,
+    Users,
+    TrendingUp,
+    Code2,
+    Rocket,
+    Search
 };
 
 export default function DomainDetail({ domain }: DomainDetailProps) {
@@ -71,15 +75,25 @@ export default function DomainDetail({ domain }: DomainDetailProps) {
                     className="glass rounded-[3rem] p-8 md:p-16 border-white/10 relative overflow-hidden mb-16"
                 >
                     <div className={cn(
-                        "absolute top-0 right-0 p-8 opacity-10",
+                        "absolute top-0 right-0 p-8 opacity-20 w-1/2 h-full",
                         domain.color.replace("from-", "from-").replace("to-transparent", "to-transparent")
                     )}>
-                        <IconComponent className="w-32 h-32 text-accent" />
+                        <Image
+                            src={domain.image}
+                            alt=""
+                            fill
+                            className="object-cover opacity-20 blur-sm mask-gradient"
+                        />
                     </div>
 
                     <div className="relative z-10">
-                        <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-8">
-                            <IconComponent className="w-8 h-8 text-accent" />
+                        <div className="w-24 h-24 rounded-2xl overflow-hidden mb-8 border border-white/10 relative">
+                            <Image
+                                src={domain.image}
+                                alt={domain.title}
+                                fill
+                                className="object-cover"
+                            />
                         </div>
 
                         <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 uppercase leading-tight">
@@ -169,21 +183,21 @@ export default function DomainDetail({ domain }: DomainDetailProps) {
                     )}
 
                     {/* Placeholder for when no content is provided */}
-                    {!domain.content?.overview && 
-                     !domain.content?.services?.length && 
-                     !domain.content?.approach && 
-                     !domain.content?.outcomes?.length && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="glass rounded-3xl p-8 md:p-12 border-white/10 text-center"
-                        >
-                            <p className="text-lg text-muted-foreground italic">
-                                Content will be added here. This page is ready for your content.
-                            </p>
-                        </motion.div>
-                    )}
+                    {!domain.content?.overview &&
+                        !domain.content?.services?.length &&
+                        !domain.content?.approach &&
+                        !domain.content?.outcomes?.length && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="glass rounded-3xl p-8 md:p-12 border-white/10 text-center"
+                            >
+                                <p className="text-lg text-muted-foreground italic">
+                                    Content will be added here. This page is ready for your content.
+                                </p>
+                            </motion.div>
+                        )}
                 </div>
 
                 {/* CTA Section */}
