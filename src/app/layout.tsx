@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Hy - Root to Result",
   description: "Hybrid Problem-Solving & Innovation Agency. Strategy, Technology, and Execution under one system.",
+  icons: {
+    icon: "/Screenshot_20260210_173501.jpg",
+  },
 };
 
 export default function RootLayout({
